@@ -1,0 +1,35 @@
+.pacifico {
+    font-family: "Pacifico", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--text)
+}
+
+.sm {
+    font-size: 16pt;
+}
+
+.md {
+    font-size: 20pt;
+}
+
+.lg {
+    font-size: 24pt;
+}
+
+.xl {
+    font-size: 30pt;
+}
+
+.fade-in-animation {
+    animation: fade-in .3s;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
