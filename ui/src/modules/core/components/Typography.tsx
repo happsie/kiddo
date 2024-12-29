@@ -5,7 +5,7 @@ type TextSize = 'sm' | 'md' | 'lg' | 'xl';
 
 type TextAnimation = 'fade-in';
 
-type TextStyle = 'pacifico';
+type TextStyle = 'pacifico' | 'inter';
 
 export type TitleProps = {
     children: string;
@@ -15,7 +15,7 @@ export type TitleProps = {
     style?: TextStyle;
 }
 
-export const Title: React.FC<TitleProps> = ({color, size = 'md', animation, style = 'pacifico', children}) => {
+export const Title: React.FC<TitleProps> = ({color, size = 'lg', animation, style = 'pacifico', children}) => {
     const textSizeClass = getTextSizeClass(size);
     const animationClass = getAnimationClass(animation);
     const textStyleClass = getTextStyleClass(style);
@@ -23,6 +23,17 @@ export const Title: React.FC<TitleProps> = ({color, size = 'md', animation, styl
     return (
         <h1 className={cls(textStyleClass, textSizeClass, animationClass)}
             style={{color: color ?? ''}}>{children}</h1>
+    )
+}
+
+type TextProps = Omit<TitleProps, 'animation' | 'size'>
+
+export const Text: React.FC<TextProps> = ({color, style = 'inter', children}) => {
+    const textStyleClass = getTextStyleClass(style);
+    return (
+        <p className={cls(textStyleClass)} style={{color: color ?? ''}}>
+            {children}
+        </p>
     )
 }
 
@@ -65,8 +76,11 @@ function getTextStyleClass(style: TextStyle) {
         case 'pacifico':
             textStyle = styles.pacifico;
             break;
+        case 'inter':
+            textStyle = styles.inter;
+            break;
         default:
-            textStyle = styles.pacifico;
+            textStyle = styles.inter;
     }
     return textStyle;
 }

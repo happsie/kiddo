@@ -34,7 +34,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({show, menuItems}) => {
         <ol className={styles.trackMenu} style={{display: show ? 'flex' : 'none'}}>
             {menuItems.map((item, index) => (
                 <li key={index} className={styles.trackMenuItem} onClick={() => navigate(item.navigate)}>
-                    <FontAwesomeIcon icon={item.icon} color={item.color ?? '#f9ecf9'}/>
+                    <FontAwesomeIcon icon={item.icon} color={item.color ?? '#f6fdfe'}/>
                 </li>
             ))}
         </ol>
@@ -83,25 +83,25 @@ export const Menu: React.FC = () => {
             <ol className={styles.navItems}>
                 <li onClick={() => navigate('/settings')}
                     className={isSelected('/settings') ? cls(styles.navItem, styles.selected) : styles.navItem}>
-                    <FontAwesomeIcon icon={faGear} color={'#f9ecf9'}/>
+                    <FontAwesomeIcon icon={faGear} color={'#f6fdfe'}/>
                 </li>
                 <li onClick={() => navigate('/statistics')}
                     className={isSelected('/statistics') ? cls(styles.navItem, styles.selected) : styles.navItem}>
-                    <FontAwesomeIcon icon={faChartLine} color={'#f9ecf9'}/>
+                    <FontAwesomeIcon icon={faChartLine} color={'#f6fdfe'}/>
                 </li>
                 <li className={showTrackMenu ? cls(styles.navItem, styles.contextMenuSelected) : styles.navItem}
                     onClick={() => setShowTrackMenu(!showTrackMenu)}>
-                    <FontAwesomeIcon icon={faPlus} color={'#f9ecf9'}
+                    <FontAwesomeIcon icon={faPlus} color={'#f6fdfe'}
                                      className={showTrackMenu ? styles.trackMenuOpen : styles.trackMenuClose}/>
                     <ContextMenu show={showTrackMenu} menuItems={trackMenuItems}/>
                 </li>
                 <li onClick={() => navigate('/history')}
                     className={isSelected('/history') ? cls(styles.navItem, styles.selected) : styles.navItem}>
-                    <FontAwesomeIcon icon={faList} color={'#f9ecf9'}/>
+                    <FontAwesomeIcon icon={faList} color={'#f6fdfe'}/>
                 </li>
                 <li onClick={() => navigate('/')}
                     className={isSelected('/') ? cls(styles.navItem, styles.selected) : styles.navItem}>
-                    <FontAwesomeIcon icon={faHouse} color={'#f9ecf9'}/>
+                    <FontAwesomeIcon icon={faHouse} color={'#f6fdfe'}/>
                 </li>
             </ol>
         </nav>

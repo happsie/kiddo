@@ -1,13 +1,15 @@
 .nav {
     position: fixed;
     bottom: 0;
-    max-width: 100svw;
 }
 
 .navItems {
     min-width: 100svw;
     display: flex;
     justify-content: space-evenly;
+    background-color: var(--primary);
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 
 .navItem {
@@ -18,7 +20,7 @@
     cursor: pointer;
 
     &:hover {
-        background-color: var(--hover);
+        background-color: var(--secondary);
     }
 
     &:last-child {
@@ -31,11 +33,56 @@
 }
 
 .selected {
-    border-top: 3px solid var(--hover);
+    border-top: 3px solid var(--secondary);
 }
 
 .context-menu-selected {
-    background-color: var(--hover);
+    background-color: var(--secondary);
+}
+
+.track-menu-open {
+    animation: tilt .3s 1;
+    animation-fill-mode: forwards;
+}
+
+.track-menu-close {
+    animation: tilt-back .3s 1;
+    animation-fill-mode: forwards;
+}
+
+.track-menu {
+    position: fixed;
+    justify-content: space-evenly;
+    bottom: 3.5em;
+    width: 50svw;
+    animation: happy-expand .5s 1;
+}
+
+.track-menu-item {
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    background-color: var(--primary);
+
+    &:hover {
+        background-color: var(--secondary);
+        svg {
+            animation: popup .3s 1;
+            animation-fill-mode: forwards;
+        }
+    }
+
+    &:last-child {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    &:first-child {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
 }
 
 @keyframes tilt {
@@ -56,16 +103,6 @@
     }
 }
 
-.track-menu-open {
-    animation: tilt .3s 1;
-    animation-fill-mode: forwards;
-}
-
-.track-menu-close {
-    animation: tilt-back .3s 1;
-    animation-fill-mode: forwards;
-}
-
 @keyframes happy-expand {
     0% {
         width: 50px;
@@ -75,33 +112,11 @@
     }
 }
 
-.track-menu {
-    position: fixed;
-    justify-content: space-evenly;
-    bottom: 3.5em;
-    width: 50svw;
-    animation: happy-expand .5s 1;
-}
-
-.track-menu-item {
-    width: 100%;
-    padding: 1em;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-    background-color: var(--secondary);
-
-    &:hover {
-        background-color: var(--hover);
+@keyframes popup {
+    0% {
+        transform: translateY(0px);
     }
-
-    &:last-child {
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
-
-    &:first-child {
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
+    100% {
+        transform: translateY(-3px);
     }
 }

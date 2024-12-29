@@ -3,12 +3,12 @@
 @import "default.css";
 
 :root {
-    --text: #f8d6e9;
-    --background: #090106;
-    --primary: #ea84ba;
-    --secondary: #178663;
-    --accent: #4e7ce1;
-    --hover: #49a386;
+    --text: #030e11;
+    --background: #edfdff;
+    --primary: #33c6e1;
+    --secondary: #ee91a5;
+    --accent: #e4a64e;
+    --hover: #edb76b;
 }
 
 html {

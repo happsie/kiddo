@@ -1,7 +1,7 @@
 import styles from './Container.module.css';
 
 export type ContainerProps = {
-    children: React.JSX.Element;
+    children: React.JSX.Element[];
 }
 
 /**
