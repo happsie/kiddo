@@ -1,0 +1,38 @@
+.drawer {
+    width: 100svw;
+    position: fixed;
+    bottom: 0;
+    background-color: var(--accent);
+    height: 40%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 0 5px -1px var(--text);
+}
+
+.drawerOpen {
+    animation: slide-up .4s 1;
+    animation-fill-mode: forwards;
+}
+
+.drawerClose {
+    animation: slide-down .4s 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slide-up {
+    0% {
+        bottom: -40%;
+    }
+    100% {
+        bottom: 0;
+    }
+}
+
+@keyframes slide-down {
+    0% {
+        bottom: 0;
+    }
+    100% {
+        bottom: -40%;
+    }
+}

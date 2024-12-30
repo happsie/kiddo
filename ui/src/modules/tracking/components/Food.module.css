@@ -1,0 +1,17 @@
+.drawerContent {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.drawerHeader {
+    width: 90svw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.drawerClose {
+    cursor: pointer;
+}
