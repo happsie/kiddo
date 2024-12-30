@@ -1,5 +1,5 @@
-import {Text, Title} from "../../core/components/Typography.tsx";
-import {Container} from "../../core/components/Container.tsx";
+import {Text, Title} from "../../core/components/typography/Typography.tsx";
+import {Container} from "../../core/components/container/Container.tsx";
 
 export const Food = () => {
     return (
