@@ -3,17 +3,20 @@
 @import "default.css";
 
 :root {
-    --text: #030e11;
-    --background: #edfdff;
-    --primary: #33c6e1;
-    --secondary: #ee91a5;
-    --accent: #e4a64e;
-    --hover: #edb76b;
+    --text: #0d0c2b;
+    --light-text: #b0b3ee;
+    --background: #fffffd;
+    --primary: #809be4;
+    --secondary: #5566ce;
+    --accent: #ffa37a;
 }
 
 html {
     box-sizing: border-box;
     font-size: 16px;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none
 }
 
 *, *:before, *:after {

@@ -5,13 +5,14 @@
 }
 
 .drawerHeader {
-    width: 90svw;
+    width: 100svw;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: baseline;
+    justify-content: flex-end;
 }
 
 .drawerClose {
+    padding: .5em;
+    margin-right: .5em;
     cursor: pointer;
 }

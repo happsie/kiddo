@@ -1,4 +1,5 @@
 import styles from './Typography.module.css';
+import {Color} from "@core/utils/colors.ts";
 import cls from "classnames";
 
 type TextSize = 'sm' | 'md' | 'lg' | 'xl';
@@ -9,7 +10,7 @@ type TextStyle = 'pacifico' | 'inter';
 
 export type TitleProps = {
     children: string;
-    color?: string;
+    color?: typeof Color[keyof typeof Color];
     size?: TextSize;
     animation?: TextAnimation;
     style?: TextStyle;

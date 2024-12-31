@@ -7,7 +7,7 @@
     min-width: 100svw;
     display: flex;
     justify-content: space-evenly;
-    background-color: var(--primary);
+    background-color: var(--secondary);
 }
 
 .navItem {
@@ -18,16 +18,16 @@
     cursor: pointer;
 
     &:hover {
-        background-color: var(--secondary);
+        background-color: var(--primary);
     }
 }
 
 .selected {
-    border-top: 3px solid var(--secondary);
+    border-top: 3px solid var(--primary);
 }
 
 .context-menu-selected {
-    background-color: var(--secondary);
+    background-color: var(--primary);
 }
 
 .track-menu-open {
@@ -59,10 +59,10 @@
     display: flex;
     justify-content: center;
     cursor: pointer;
-    background-color: var(--primary);
+    background-color: var(--secondary);
 
     &:hover {
-        background-color: var(--secondary);
+        background-color: var(--primary);
         svg {
             animation: popup .3s;
             animation-fill-mode: forwards;

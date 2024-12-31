@@ -1,4 +1,8 @@
 export const Color = {
-    Primary: '#33c6e1',
-    Background: '#f6fdfe'
+    Primary: '#809be4',
+    Secondary: '#5566ce',
+    Background: '#fffffd',
+    Text: '#0d0c2b',
+    TextLight: '#b0b3ee',
+    Accent: '#ffa37a',
 } as const;

@@ -1,12 +1,11 @@
 .drawer {
     width: 100svw;
     position: fixed;
-    bottom: 0;
+    bottom: -40%;
     background-color: var(--accent);
     height: 40%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    box-shadow: 0 0 5px -1px var(--text);
 }
 
 .drawerOpen {

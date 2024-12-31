@@ -3,7 +3,7 @@
     font-weight: 400;
     font-style: normal;
     color: var(--text);
-    padding: .1em;
+    padding: .2em;
 }
 
 .inter {
@@ -31,7 +31,7 @@
 }
 
 .fade-in-animation {
-    animation: fade-in .3s;
+    animation: fade-in .5s;
 }
 
 @keyframes fade-in {
