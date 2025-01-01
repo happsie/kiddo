@@ -1,0 +1,22 @@
+.button {
+    padding: .8em;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-family: "Exo 2", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    color: var(--text);
+    margin: .2em;
+    cursor: pointer;
+}
+
+.primary {
+    background-color: var(--primary);
+}
+
+.secondary {
+    color: var(--light-text);
+    background-color: transparent;
+    border: 1px solid var(--secondary);
+}

@@ -6,7 +6,7 @@ type TextSize = 'sm' | 'md' | 'lg' | 'xl';
 
 type TextAnimation = 'fade-in';
 
-type TextStyle = 'pacifico' | 'inter';
+type TextStyle = 'pacifico' | 'inter' | 'exo';
 
 export type TitleProps = {
     children: string;
@@ -16,7 +16,13 @@ export type TitleProps = {
     style?: TextStyle;
 }
 
-export const Title: React.FC<TitleProps> = ({color, size = 'lg', animation, style = 'pacifico', children}) => {
+export const Title: React.FC<TitleProps> = ({
+                                                color = Color.Text,
+                                                size = 'lg',
+                                                animation,
+                                                style = 'exo',
+                                                children
+                                            }) => {
     return (
         <h1 className={cls({
                 [styles.sm]: size === 'sm',
@@ -26,7 +32,8 @@ export const Title: React.FC<TitleProps> = ({color, size = 'lg', animation, styl
             },
             {
                 [styles.pacifico]: style === 'pacifico',
-                [styles.inter]: style === 'inter'
+                [styles.inter]: style === 'inter',
+                [styles.exo]: style === 'exo'
             },
             {
                 [styles.fadeInAnimation]: animation === 'fade-in'

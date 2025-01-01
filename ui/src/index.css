@@ -1,14 +1,20 @@
 @import url('https://fonts.googleapis.com/css?family=Inter:700|Inter:400');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
 @import "default.css";
 
 :root {
     --text: #0d0c2b;
     --light-text: #b0b3ee;
-    --background: #fffffd;
+    --background: #18222e;
+    --light: #f8f8f8;
     --primary: #809be4;
     --secondary: #5566ce;
     --accent: #ffa37a;
+    --soft-red: #ff999a;
+    --soft-blue: #70d0fb;
+    --soft-purple: #b185fa;
+    --soft-green: #70fbaa;
 }
 
 html {

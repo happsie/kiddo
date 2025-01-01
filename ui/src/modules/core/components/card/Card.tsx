@@ -7,13 +7,21 @@ type CardSize = 'sm' | 'md' | 'lg';
 
 export type CardProps = {
     children: React.JSX.Element | React.JSX.Element[];
+    color?: typeof Color[keyof typeof Color];
     title?: string;
     size?: CardSize;
     className?: string;
     onClick?: () => void;
 }
 
-export const Card: React.FC<CardProps> = ({size = 'sm', className, title, onClick, children}) => {
+export const Card: React.FC<CardProps> = ({
+                                              size = 'sm',
+                                              className,
+                                              title,
+                                              color = Color.SoftPurple,
+                                              onClick,
+                                              children
+                                          }) => {
     return (<div className={styles.cardParent} onClick={onClick}>
             <div className={cls(
                 styles.card,
@@ -22,10 +30,10 @@ export const Card: React.FC<CardProps> = ({size = 'sm', className, title, onClic
                     [styles.sm]: size === 'sm',
                     [styles.md]: size === 'md',
                     [styles.lg]: size === 'lg'
-                })}>
+                })} style={{backgroundColor: color}}>
                 {children}
             </div>
-            {title ? <Text color={Color.TextLight}>{title}</Text> : null}
+            {title ? <Text color={Color.LightText}>{title}</Text> : null}
         </div>
     )
 }
