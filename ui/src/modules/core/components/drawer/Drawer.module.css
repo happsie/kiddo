@@ -19,6 +19,17 @@
     animation-fill-mode: forwards;
 }
 
+.drawerTop {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1em;
+}
+
+.drawerTop > svg {
+   cursor: pointer;
+   padding: .5em;
+}
+
 @keyframes slide-up {
     0% {
         bottom: -40%;

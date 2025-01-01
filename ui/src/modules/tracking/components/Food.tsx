@@ -67,14 +67,11 @@ export const Food = () => {
                     <span>{item.emoji}</span>
                 </Card>))}
             </div>
-            <Drawer isOpen={isOpen}>
+            <Drawer isOpen={isOpen} toggle={toggle}>
                 <div className={styles.drawerContent}>
-                    <div className={styles.drawerHeader}>
-                        <FontAwesomeIcon icon={faClose} color={Color.Background} className={styles.drawerClose}
-                                         onClick={toggle} size={'lg'}/>
-                    </div>
-                    <Title style={'pacifico'}>Here goes some content!</Title>
+                    <Title>Just the last details...</Title>
                     <DateTimePicker />
+                    <PrimaryButton onClick={() => alert('hello world')} color={Color.Accent}>Save</PrimaryButton>
                 </div>
             </Drawer>
         </Container>
