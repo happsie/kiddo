@@ -1,23 +1,27 @@
 import styles from './Button.module.css';
 import cls from "classnames";
-import {Color} from "@core/utils/colors.ts";
+import { Color } from "@core/utils/colors.ts";
 
 export interface Button {
     children: string;
     onClick: () => void;
+    variant?: 'primary' | 'secondary'
     color?: typeof Color[keyof typeof Color];
 }
 
-export const PrimaryButton: React.FC<Button> = ({onClick, color = Color.Primary, children}) => {
+export const Button: React.FC<Button> = ({ onClick, color = Color.Primary, variant = 'primary', children }) => {
+    const primaryStyling = {
+        backgroundColor: color,
+    }
+    const secondaryStyling = {
+        border: `1px solid ${color}`,
+        color: color
+    }
     return (
-        <button onClick={onClick} className={cls(styles.button, styles.primary)}
-                style={{backgroundColor: color}}>{children}</button>
-    )
-}
-
-export const SecondaryButton: React.FC<Button> = ({color = Color.Secondary, onClick, children}) => {
-    return (
-        <button onClick={onClick} className={cls(styles.button, styles.secondary)}
-                style={{border: `1px solid ${color}`, color: color}}>{children}</button>
+        <button onClick={onClick} className={cls(styles.button, {
+            [styles.primary]: variant === 'primary',
+            [styles.secondary]: variant === 'secondary',
+        })}
+            style={variant === 'primary' ? primaryStyling : secondaryStyling}>{children}</button>
     )
 }

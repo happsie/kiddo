@@ -4,11 +4,9 @@ import {Color} from "@core/utils/colors.ts";
 import {Card} from "@core/components/card/Card";
 import {Drawer} from "@core/components/drawer/Drawer.tsx";
 import styles from './Food.module.css';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClose} from '@fortawesome/free-solid-svg-icons'
 import {useDrawer} from "@core/hooks/useDrawer.ts";
 import {DateTimePicker} from "@core/components/input/DateTime.tsx";
-import {SecondaryButton, PrimaryButton} from "@core/components/button/Button.tsx";
+import {Button} from "@core/components/button/Button.tsx";
 import {useState} from "react";
 
 type Item = {
@@ -56,10 +54,10 @@ export const Food = () => {
         <Container>
             <Title size={'xl'} animation={'fade-in'} color={Color.LightText}>Track Food</Title>
             <div style={{display: 'flex', justifyContent: 'flex-start'}}>
-                <SecondaryButton onClick={() => filter('ALL')} color={Color.SoftBlue}>All</SecondaryButton>
-                <SecondaryButton onClick={() => filter('liquid')} color={Color.SoftPurple}>Liquid</SecondaryButton>
-                <SecondaryButton onClick={() => filter('fruit')} color={Color.SoftGreen}>Fruit</SecondaryButton>
-                <SecondaryButton onClick={() => filter('food')} color={Color.SoftBlue}>Food</SecondaryButton>
+                <Button onClick={() => filter('ALL')} color={Color.SoftBlue} variant='secondary'>All</Button>
+                <Button onClick={() => filter('liquid')} color={Color.SoftPurple} variant='secondary'>Liquid</Button>
+                <Button onClick={() => filter('fruit')} color={Color.SoftGreen} variant='secondary'>Fruit</Button>
+                <Button onClick={() => filter('food')} color={Color.SoftBlue} variant='secondary'>Food</Button>
             </div>
             <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
                 {items && items.map((item, index) => (<Card onClick={toggle} size={'md'}
@@ -71,7 +69,7 @@ export const Food = () => {
                 <div className={styles.drawerContent}>
                     <Title>Just the last details...</Title>
                     <DateTimePicker />
-                    <PrimaryButton onClick={() => alert('hello world')} color={Color.Accent}>Save</PrimaryButton>
+                    <Button onClick={() => alert('hello world')} color={Color.Accent}>Save</Button>
                 </div>
             </Drawer>
         </Container>
