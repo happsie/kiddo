@@ -5,7 +5,6 @@ import {Card} from "@core/components/card/Card";
 import {Drawer} from "@core/components/drawer/Drawer.tsx";
 import styles from './Food.module.css';
 import {useDrawer} from "@core/hooks/useDrawer.ts";
-import {DateTimePicker} from "@core/components/input/DateTime.tsx";
 import {Button} from "@core/components/button/Button.tsx";
 import {useState} from "react";
 
@@ -68,7 +67,6 @@ export const Food = () => {
             <Drawer isOpen={isOpen} toggle={toggle}>
                 <div className={styles.drawerContent}>
                     <Title>Just the last details...</Title>
-                    <DateTimePicker />
                     <Button onClick={() => alert('hello world')} color={Color.Accent}>Save</Button>
                 </div>
             </Drawer>
