@@ -8,6 +8,7 @@ import {useDrawer} from "@core/hooks/useDrawer.ts";
 import {Button} from "@core/components/button/Button.tsx";
 import {useEffect, useMemo, useState} from "react";
 import { TimePicker, TimeSelection } from "@core/components/input/TimePicker";
+import { Counter } from "@core/components/input/Counter";
 
 type Item = {
     title: string,
@@ -87,6 +88,10 @@ export const Food = () => {
             <Drawer isOpen={isOpen} toggle={toggle}>
                 <div className={styles.drawerContent}>
                     <Title color={Color.LightText}>{selectedItem !== null ? `${selectedItem.title} ${selectedItem.emoji}` : ''}</Title>
+                    <div>
+                        <Title size="sm" color={Color.LightText}>How many portions?</Title>
+                        <Counter fontSize="md" />
+                    </div>
                     <div style={{ display: 'flex' }}>
                         <TimePicker color={Color.Background} onChange={({ hours, minutes }) => {
                             setTimeSelection({ hours: hours, minutes: minutes });

@@ -2,7 +2,7 @@ import styles from './Typography.module.css';
 import { Color } from "@core/utils/colors.ts";
 import cls from "classnames";
 
-type TextSize = 'sm' | 'md' | 'lg' | 'xl';
+export type TextSize = 'sm' | 'md' | 'lg' | 'xl';
 
 type TextAnimation = 'fade-in';
 
@@ -42,14 +42,19 @@ export const Title: React.FC<TitleProps> = ({
     )
 }
 
-type TextProps = Omit<TitleProps, 'animation' | 'size'>
+type TextProps = Omit<TitleProps, 'animation'>
 
-export const Text: React.FC<TextProps> = ({ color, style = 'inter', children }) => {
+export const Text: React.FC<TextProps> = ({ color, style = 'inter', size = 'sm', children }) => {
     return (
         <p className={cls({
             [styles.pacifico]: style === 'pacifico',
             [styles.inter]: style === 'inter'
-        },)} style={{ color: color ?? '' }}>
+        }, {
+            [styles.sm]: size === 'sm',
+            [styles.md]: size === 'md',
+            [styles.lg]: size === 'lg',
+            [styles.xl]: size === 'xl',
+        })} style={{ color: color ?? ''}}>
             {children}
         </p>
     )

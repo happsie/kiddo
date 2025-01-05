@@ -31,9 +31,7 @@ export const Drawer: React.FC<DrawerProps> = ({isOpen, showCloseButton = true, t
                 <FontAwesomeIcon icon={faClose} color={Color.Light}
                         onClick={toggle} size={'lg'}/>
                 </div>) : null}
-            <div style={{ minHeight: '100%'}}>
-                {children}
-            </div>
+            {children}
         </aside>
     )
 }

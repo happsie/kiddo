@@ -1,0 +1,11 @@
+.counter {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-evenly;
+
+    p {
+        text-align: center;
+        min-width: 40px;
+    }
+}
+
