@@ -3,7 +3,7 @@ import cls from "classnames";
 import { Color } from "@core/utils/colors.ts";
 
 export interface Button {
-    children: string;
+    children: string | React.JSX.Element | React.JSX.Element[];
     onClick: () => void;
     variant?: 'primary' | 'secondary'
     color?: typeof Color[keyof typeof Color];

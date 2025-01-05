@@ -6,7 +6,8 @@ import {Drawer} from "@core/components/drawer/Drawer.tsx";
 import styles from './Food.module.css';
 import {useDrawer} from "@core/hooks/useDrawer.ts";
 import {Button} from "@core/components/button/Button.tsx";
-import {useState} from "react";
+import {useEffect, useMemo, useState} from "react";
+import { TimePicker, TimeSelection } from "@core/components/input/TimePicker";
 
 type Item = {
     title: string,
@@ -40,13 +41,32 @@ const initialItems: Item[] = [{
 export const Food = () => {
     const [isOpen, toggle] = useDrawer();
     const [items, setItems] = useState<Item[]>(initialItems);
+    const currentDate = new Date();
+    const [timeSelection, setTimeSelection] = useState<TimeSelection>({ hours: currentDate.getHours(), minutes: currentDate.getMinutes() });
+    const [selectedItem, setSelectedItem] = useState<Item | null>(null);
 
-    const filter = (type: string) => {
+    useEffect(() => {
+        console.log(selectedDate);
+    }, [timeSelection]);
+
+    const selectedDate = useMemo(() => {
+        const date = new Date();
+        date.setHours(timeSelection.hours);
+        date.setMinutes(timeSelection.minutes);
+        return date;
+    }, [timeSelection]);
+
+    function filter(type: string) {
         if (type === 'ALL') {
             setItems(initialItems);
             return;
         }
         setItems(initialItems.filter(item => item.type === type));
+    }
+
+    function handleCardClick(item: Item) {
+        setSelectedItem(item);
+        toggle();
     }
 
     return (
@@ -59,23 +79,22 @@ export const Food = () => {
                 <Button onClick={() => filter('food')} color={Color.SoftBlue} variant='secondary'>Food</Button>
             </div>
             <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
-                {items && items.map((item, index) => (<Card onClick={toggle} size={'md'}
+                {items && items.map((item, index) => (<Card onClick={() => handleCardClick(item)} size={'md'}
                                                             title={item.title} color={item.color} key={index}>
                     <span>{item.emoji}</span>
                 </Card>))}
             </div>
             <Drawer isOpen={isOpen} toggle={toggle}>
                 <div className={styles.drawerContent}>
-                    <Title>Just the last details...</Title>
-                    <Button onClick={() => alert('hello world')} color={Color.Accent}>Save</Button>
+                    <Title color={Color.LightText}>{selectedItem !== null ? `${selectedItem.title} ${selectedItem.emoji}` : ''}</Title>
+                    <div style={{ display: 'flex' }}>
+                        <TimePicker color={Color.Background} onChange={({ hours, minutes }) => {
+                            setTimeSelection({ hours: hours, minutes: minutes });
+                        }} />
+                        <Button onClick={() => alert('hello world')} color={Color.Primary}>Save</Button>
+                    </div>
                 </div>
             </Drawer>
         </Container>
     )
 }
-
-/*
- * <Text>When did it happen?</Text>
-                    <DateTimePicker/>
-                    <Text>How many portions?</Text>
- */

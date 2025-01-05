@@ -1,31 +1,7 @@
 .drawerContent {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
-}
-
-.drawerHeader {
-    width: 100svw;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-}
-
-.drawerClose {
-    padding: .5em;
-    margin-right: .5em;
-    cursor: pointer;
-}
-
-.animationTest {
-    animation: test 2s 1;
-}
-
-@keyframes test {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+    min-height: 100%;
 }

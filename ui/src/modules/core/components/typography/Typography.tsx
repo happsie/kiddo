@@ -1,5 +1,5 @@
 import styles from './Typography.module.css';
-import {Color} from "@core/utils/colors.ts";
+import { Color } from "@core/utils/colors.ts";
 import cls from "classnames";
 
 type TextSize = 'sm' | 'md' | 'lg' | 'xl';
@@ -17,19 +17,19 @@ export type TitleProps = {
 }
 
 export const Title: React.FC<TitleProps> = ({
-                                                color = Color.Text,
-                                                size = 'lg',
-                                                animation,
-                                                style = 'exo',
-                                                children
-                                            }) => {
+    color = Color.Text,
+    size = 'lg',
+    animation,
+    style = 'exo',
+    children
+}) => {
     return (
         <h1 className={cls({
-                [styles.sm]: size === 'sm',
-                [styles.md]: size === 'md',
-                [styles.lg]: size === 'lg',
-                [styles.xl]: size === 'xl',
-            },
+            [styles.sm]: size === 'sm',
+            [styles.md]: size === 'md',
+            [styles.lg]: size === 'lg',
+            [styles.xl]: size === 'xl',
+        },
             {
                 [styles.pacifico]: style === 'pacifico',
                 [styles.inter]: style === 'inter',
@@ -38,18 +38,18 @@ export const Title: React.FC<TitleProps> = ({
             {
                 [styles.fadeInAnimation]: animation === 'fade-in'
             })}
-            style={{color: color ?? ''}}>{children}</h1>
+            style={{ color: color ?? '' }}>{children}</h1>
     )
 }
 
 type TextProps = Omit<TitleProps, 'animation' | 'size'>
 
-export const Text: React.FC<TextProps> = ({color, style = 'inter', children}) => {
+export const Text: React.FC<TextProps> = ({ color, style = 'inter', children }) => {
     return (
         <p className={cls({
             [styles.pacifico]: style === 'pacifico',
             [styles.inter]: style === 'inter'
-        },)} style={{color: color ?? ''}}>
+        },)} style={{ color: color ?? '' }}>
             {children}
         </p>
     )

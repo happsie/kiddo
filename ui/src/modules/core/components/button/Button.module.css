@@ -8,6 +8,8 @@
     color: var(--text);
     margin: .2em;
     cursor: pointer;
+    min-width: 80px;
+    max-height: 50px;
 }
 
 .primary {
