@@ -1,12 +1,12 @@
-import {Title} from "@core/components/typography/Typography.tsx";
-import {Container} from "@core/components/container/Container.tsx";
-import {Color} from "@core/utils/colors.ts";
-import {Card} from "@core/components/card/Card";
-import {Drawer} from "@core/components/drawer/Drawer.tsx";
+import { Title } from "@core/components/typography/Typography.tsx";
+import { Container } from "@core/components/container/Container.tsx";
+import { Color } from "@core/utils/colors.ts";
+import { Card } from "@core/components/card/Card";
+import { Drawer } from "@core/components/drawer/Drawer.tsx";
 import styles from './Food.module.css';
-import {useDrawer} from "@core/hooks/useDrawer.ts";
-import {Button} from "@core/components/button/Button.tsx";
-import {useEffect, useMemo, useState} from "react";
+import { useDrawer } from "@core/hooks/useDrawer.ts";
+import { Button } from "@core/components/button/Button.tsx";
+import { useEffect, useMemo, useState } from "react";
 import { TimePicker, TimeSelection } from "@core/components/input/TimePicker";
 import { Counter } from "@core/components/input/Counter";
 
@@ -74,15 +74,15 @@ export const Food = () => {
     return (
         <Container>
             <Title size={'xl'} animation={'fade-in'} color={Color.LightText} style="pacifico">Track Food</Title>
-            <div style={{display: 'flex', justifyContent: 'flex-start'}}>
+            <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
                 <Button onClick={() => filter('ALL')} color={Color.SoftBlue} variant='secondary'>All</Button>
                 <Button onClick={() => filter('liquid')} color={Color.SoftPurple} variant='secondary'>Liquid</Button>
                 <Button onClick={() => filter('fruit')} color={Color.SoftGreen} variant='secondary'>Fruit</Button>
                 <Button onClick={() => filter('food')} color={Color.SoftBlue} variant='secondary'>Food</Button>
             </div>
-            <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {items && items.map((item, index) => (<Card onClick={() => handleCardClick(item)} size={'md'}
-                                                            title={item.title} color={item.color} key={index}>
+                    title={item.title} color={item.color} key={index}>
                     <span>{item.emoji}</span>
                 </Card>))}
             </div>

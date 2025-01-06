@@ -54,7 +54,7 @@ export const Text: React.FC<TextProps> = ({ color, style = 'inter', size = 'sm',
             [styles.md]: size === 'md',
             [styles.lg]: size === 'lg',
             [styles.xl]: size === 'xl',
-        })} style={{ color: color ?? ''}}>
+        })} style={{ color: color ?? '' }}>
             {children}
         </p>
     )
