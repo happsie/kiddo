@@ -45,6 +45,7 @@ export const Food = () => {
     const currentDate = new Date();
     const [timeSelection, setTimeSelection] = useState<TimeSelection>({ hours: currentDate.getHours(), minutes: currentDate.getMinutes() });
     const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+    const [portionCount, setPortionCount] = useState<number>(1);
 
     useEffect(() => {
         console.log(selectedDate);
@@ -72,7 +73,7 @@ export const Food = () => {
 
     return (
         <Container>
-            <Title size={'xl'} animation={'fade-in'} color={Color.LightText}>Track Food</Title>
+            <Title size={'xl'} animation={'fade-in'} color={Color.LightText} style="pacifico">Track Food</Title>
             <div style={{display: 'flex', justifyContent: 'flex-start'}}>
                 <Button onClick={() => filter('ALL')} color={Color.SoftBlue} variant='secondary'>All</Button>
                 <Button onClick={() => filter('liquid')} color={Color.SoftPurple} variant='secondary'>Liquid</Button>
@@ -90,13 +91,13 @@ export const Food = () => {
                     <Title color={Color.LightText}>{selectedItem !== null ? `${selectedItem.title} ${selectedItem.emoji}` : ''}</Title>
                     <div>
                         <Title size="sm" color={Color.LightText}>How many portions?</Title>
-                        <Counter fontSize="md" />
+                        <Counter fontSize="md" onChange={count => setPortionCount(count)} />
                     </div>
                     <div style={{ display: 'flex' }}>
                         <TimePicker color={Color.Background} onChange={({ hours, minutes }) => {
                             setTimeSelection({ hours: hours, minutes: minutes });
                         }} />
-                        <Button onClick={() => alert('hello world')} color={Color.Primary}>Save</Button>
+                        <Button onClick={() => alert(`${portionCount} ${selectedDate.toString()} - ${JSON.stringify(selectedItem)}`)} color={Color.Primary}>Save</Button>
                     </div>
                 </div>
             </Drawer>
