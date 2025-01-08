@@ -47,16 +47,16 @@ export const Food = () => {
     const [selectedItem, setSelectedItem] = useState<Item | null>(null);
     const [portionCount, setPortionCount] = useState<number>(1);
 
-    useEffect(() => {
-        console.log(selectedDate);
-    }, [timeSelection]);
-
     const selectedDate = useMemo(() => {
         const date = new Date();
         date.setHours(timeSelection.hours);
         date.setMinutes(timeSelection.minutes);
         return date;
     }, [timeSelection]);
+
+    useEffect(() => {
+        console.log(selectedDate);
+    }, [selectedDate]);
 
     function filter(type: string) {
         if (type === 'ALL') {
