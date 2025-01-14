@@ -1,26 +1,17 @@
-package tracking 
+package tracking
 
 import (
 	"encoding/json"
 	"io"
 	"log/slog"
 	"net/http"
+
+	"github.com/happsie/kiddo/internal/infra"
 )
 
 type Handlers struct {
+	db infra.DB
 }
-
-/*
-	mux.HandleFunc("POST /api/kiddo/track-type-v1", func(w http.ResponseWriter, r *http.Request) {
-	})
-
-	mux.HandleFunc("GET /api/kiddo/track-type-v1", func(w http.ResponseWriter, r *http.Request) {
-
-	})
-
-	mux.HandleFunc("PUT /api/kiddo/track-type-v1/{trackID}", func(w http.ResponseWriter, r *http.Request) {
-	})
-*/
 
 func (h Handlers) CreateTrackType(w http.ResponseWriter, r *http.Request) {
 	trackType := &TrackType{}
@@ -41,6 +32,10 @@ func (h Handlers) GetTrackTypes(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (h Handlers) GetTrackType(w http.ResponseWriter, r *http.Request) {
+func (h Handlers) UpdateTrackType(w http.ResponseWriter, r *http.Request) {
+
+}
+
+func (h Handlers) DeleteTrackType(w http.ResponseWriter, r *http.Request) {
 
 }

@@ -12,7 +12,8 @@ func SetupApi() *http.ServeMux {
 
 	mux.HandleFunc("POST /api/kiddo/track-type-v1", trackHandler.CreateTrackType)
 	mux.HandleFunc("GET /api/kiddo/track-type-v1", trackHandler.GetTrackTypes)
-	mux.HandleFunc("PUT /api/kiddo/track-type-v1/{trackID}", trackHandler.GetTrackType)
+	mux.HandleFunc("PUT /api/kiddo/track-type-v1/{trackID}", trackHandler.UpdateTrackType)
+	mux.HandleFunc("DELETE /api/kiddo/track-type-v1/{trackID}", trackHandler.DeleteTrackType)
 
 	mux.HandleFunc("GET /api/kiddo/track-events-v1", func(w http.ResponseWriter, r *http.Request) {
 	})
