@@ -68,7 +68,10 @@ export const Food = () => {
 
     function handleCardClick(item: Item) {
         setSelectedItem(item);
-        toggle();
+        // Let's leave the drawer open instead of re-opening it doing unecessary animations
+        //if (selectedItem && item.type === selectedItem?.type) {
+            toggle();
+        //}
     }
 
     return (

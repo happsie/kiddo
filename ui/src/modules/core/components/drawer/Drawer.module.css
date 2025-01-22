@@ -2,6 +2,7 @@
     width: 100svw;
     position: fixed;
     bottom: -60%;
+    left: 0%;
     height: 60%;
     background-color: var(--background);
     border-top-left-radius: 30px;
