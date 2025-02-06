@@ -23,5 +23,8 @@ export default defineConfig({
         changeOrigin: true
       }
     }
+  },
+  build: {
+      manifest: 'manifest.json'
   }
 })
