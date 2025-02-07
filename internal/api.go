@@ -4,10 +4,13 @@ import (
 	"net/http"
 
 	"github.com/happsie/kiddo/internal/tracking"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-func SetupApi() *http.ServeMux {
-	trackHandler := tracking.Handlers{}
+func SetupApi(conn *pgxpool.Pool) *http.ServeMux {
+	trackHandler := tracking.Handlers{
+		Conn: conn,
+	}
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("POST /api/kiddo/track-type-v1", trackHandler.CreateTrackType)

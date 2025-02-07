@@ -1,9 +1,9 @@
 package infra
 
 type Config struct {
-	Database
+	Database Database
 }
 
 type Database struct {
-
+	URL string 	
 }
