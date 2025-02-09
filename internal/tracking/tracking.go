@@ -1,14 +1,15 @@
-package tracking 
+package tracking
 
 import "time"
 
 type TrackType struct {
-	ID        int32
-	Name      string
-	Emoji     string
-	Color     string
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ID         int32
+	Name       string
+	Emoji      string
+	Color      string
+	MetricType string
+	CreatedAt  time.Time
+	UpdatedAt  time.Time
 }
 
 type TrackEvent struct {
