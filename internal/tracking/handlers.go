@@ -12,15 +12,7 @@ import (
 type Handlers struct {
 	Conn *pgxpool.Pool
 }
-/*
-	ID        int32
-	Name      string
-	Emoji     string
-	Color     string
-	CreatedAt time.Time
-	UpdatedAt time.Time
 
-*/
 func (h Handlers) CreateTrackType(w http.ResponseWriter, r *http.Request) {
 	trackType := &TrackType{}
 	b, err := io.ReadAll(r.Body)
@@ -34,8 +26,8 @@ func (h Handlers) CreateTrackType(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	slog.Debug("success reading track type", "trackType", trackType)
-	// optimistic just for PoC just saving the value to postgres. 
-	h.Conn.Exec(r.Context(), "INSERT INTO track_type (id, name, emoji, color, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)", )
+	// just doing a raw query here in the handler just for PoC 
+	h.Conn.Exec(r.Context(), "INSERT INTO track_type (id, name, emoji, color, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6)", )
 }
 
 func (h Handlers) GetTrackTypes(w http.ResponseWriter, r *http.Request) {

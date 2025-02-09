@@ -7,8 +7,8 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-func InitDB(database Database) (*pgxpool.Pool, error) {
-	poolConfig, err := pgxpool.ParseConfig(database.URL)
+func InitDB(db Database) (*pgxpool.Pool, error) {
+	poolConfig, err := pgxpool.ParseConfig(db.ConnString)
 	if err != nil {
 		return nil, err
 	}

@@ -5,5 +5,5 @@ type Config struct {
 }
 
 type Database struct {
-	URL string 	
+	ConnString string 	
 }
