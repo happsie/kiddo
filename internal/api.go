@@ -7,9 +7,12 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-func SetupApi(conn *pgxpool.Pool) *http.ServeMux {
+func SetupApi(pool *pgxpool.Pool) *http.ServeMux {
 	trackHandler := tracking.Handlers{
-		Conn: conn,
+		Pool: pool,
+		Repository: tracking.TrackingRepository{
+			Pool: pool,
+		},
 	}
 	mux := http.NewServeMux()
 

@@ -1,5 +1,5 @@
 CREATE TABLE track_types (
-    id int not null,
+    id SERIAL primary key,
     name text not null,
     emoji text not null,
     color text not null, 
