@@ -26,3 +26,14 @@ type TrackEvent struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
+
+func fromRequest(request TrackTypeRequest) TrackType {
+	return TrackType{
+		Name:       request.Name,
+		Emoji:      request.Emoji,
+		Color:      request.Color,
+		MetricType: request.MetricType,
+		CreatedAt:  time.Now(),
+		UpdatedAt:  time.Now(),
+	}
+}

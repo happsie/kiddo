@@ -10,6 +10,11 @@ import (
 func SetupApi(pool *pgxpool.Pool) *http.ServeMux {
 	trackHandler := tracking.Handlers{
 		Pool: pool,
+		TrackingService: tracking.TrackingService{
+			Repository: tracking.TrackingRepository{
+				Pool: pool,
+			},
+		},
 		Repository: tracking.TrackingRepository{
 			Pool: pool,
 		},

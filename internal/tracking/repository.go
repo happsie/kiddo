@@ -8,7 +8,7 @@ import (
 
 type Repository interface {
 	GetAll(context context.Context) ([]TrackType, error)
-	Create(context context.Context, trackType TrackType) error
+	Create(context context.Context, trackType TrackType) (int32, error)
 	Update(context context.Context, trackType TrackType) error
 }
 
@@ -33,13 +33,14 @@ func (r TrackingRepository) GetAll(context context.Context) ([]TrackType, error)
 	return trackTypeItems, nil
 }
 
-func (r TrackingRepository) Create(context context.Context, trackType TrackType) error {
-	_, err := r.Pool.Exec(context, "INSERT INTO track_types (name, emoji, color, metric_type, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6)", trackType.Name, trackType.Emoji, trackType.Color, trackType.MetricType, trackType.CreatedAt, trackType.UpdatedAt)
+func (r TrackingRepository) Create(context context.Context, trackType TrackType) (int32, error) {
+	row := r.Pool.QueryRow(context, "INSERT INTO track_types (name, emoji, color, metric_type, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id", trackType.Name, trackType.Emoji, trackType.Color, trackType.MetricType, trackType.CreatedAt, trackType.UpdatedAt) 
+	var ID int32
+	err := row.Scan(&ID)
 	if err != nil {
-		return err
+		return 0, err
 	}
-
-	return nil
+	return ID, nil
 }
 
 func (r TrackingRepository) Update(context context.Context, trackType TrackType) error {

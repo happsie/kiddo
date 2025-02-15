@@ -5,43 +5,45 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
-	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type Handlers struct {
 	Pool       *pgxpool.Pool
+	TrackingService TrackingService
 	Repository Repository
 }
 
 func (h Handlers) CreateTrackType(w http.ResponseWriter, r *http.Request) {
-	trackTypeRequest := &TrackTypeRequest{}
+	trackTypeRequest := TrackTypeRequest{}
 	b, err := io.ReadAll(r.Body)
 	if err != nil {
 		slog.Error("could not read post body", "entity", "trackType", "err", err)
+		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	err = json.Unmarshal(b, trackTypeRequest)
+	err = json.Unmarshal(b, &trackTypeRequest)
 	if err != nil {
 		slog.Error("could not unmarshal json body", "entity", "trackType", "err", err)
+		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	slog.Debug("success reading track type", "trackType", trackTypeRequest)
-	trackType := TrackType{
-		Name:       trackTypeRequest.Name,
-		Emoji:      trackTypeRequest.Emoji,
-		Color:      trackTypeRequest.Color,
-		MetricType: trackTypeRequest.MetricType,
-		CreatedAt:  time.Now(),
-		UpdatedAt:  time.Now(),
-	}
-	err = h.Repository.Create(r.Context(), trackType)
+	trackType := fromRequest(trackTypeRequest)
+	ID, err := h.TrackingService.Create(r.Context(), trackType)
 	if err != nil {
 		slog.Error("error inserting data", "error", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	trackType.ID = ID	
+	b, err = json.Marshal(trackType)	
+	if err != nil {
+		slog.Error("could not marshal return json", "error", err)
+		w.WriteHeader(http.StatusInternalServerError)
+	}
+	w.Header().Add("content-type", "application/json")
+	w.Write(b)
 }
 
 func (h Handlers) GetTrackTypes(w http.ResponseWriter, r *http.Request) {
