@@ -9,19 +9,24 @@ import { History } from './modules/history/components/History.tsx'
 import { Statistics } from './modules/statistics/components/Statistics.tsx'
 import { Settings } from './modules/settings/components/Settings.tsx'
 import { Sleep } from './modules/tracking/components/Sleep.tsx'
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/track/food" element={<Food />} />
-        <Route path="/track/sleep" element={<Sleep />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/statistics" element={<Statistics />} />
-        <Route path="/settings" element={<Settings />} />
-      </Routes>
-      <Menu />
-    </BrowserRouter>
-  </StrictMode>,
+    <StrictMode>
+        <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/track/food" element={<Food />} />
+                    <Route path="/track/sleep" element={<Sleep />} />
+                    <Route path="/history" element={<History />} />
+                    <Route path="/statistics" element={<Statistics />} />
+                    <Route path="/settings" element={<Settings />} />
+                </Routes>
+                <Menu />
+            </BrowserRouter>
+        </QueryClientProvider>
+    </StrictMode>,
 )
