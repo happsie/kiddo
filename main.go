@@ -2,7 +2,6 @@ package main
 
 import (
 	"log/slog"
-	"net/http"
 	"os"
 
 	"github.com/happsie/kiddo/internal"
@@ -29,11 +28,10 @@ func main() {
 		slog.Error("database migrations failed", "error", err)
 		os.Exit(1)
 	}
-	conn, err := infra.InitDB(conf.Database)
+	conn, err := infra.NewDatabase(conf.Database)
 	if err != nil {
 		slog.Error("error initializing database connection", "error", err)
 		os.Exit(1)
 	}
-	mux := internal.SetupApi(conn)
-	http.ListenAndServe(addr, mux)
+	internal.StartWebserver(addr, conn)
 }

@@ -5,14 +5,10 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
-
-	"github.com/jackc/pgx/v5/pgxpool"
 )
 
 type Handlers struct {
-	Pool       *pgxpool.Pool
 	TrackingService TrackingService
-	Repository Repository
 }
 
 func (h Handlers) CreateTrackType(w http.ResponseWriter, r *http.Request) {
@@ -32,12 +28,12 @@ func (h Handlers) CreateTrackType(w http.ResponseWriter, r *http.Request) {
 	trackType := fromRequest(trackTypeRequest)
 	ID, err := h.TrackingService.Create(r.Context(), trackType)
 	if err != nil {
-		slog.Error("error inserting data", "error", err)
+		slog.Error("error storing data", "error", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	trackType.ID = ID	
-	b, err = json.Marshal(trackType)	
+	trackType.ID = ID
+	b, err = json.Marshal(trackType)
 	if err != nil {
 		slog.Error("could not marshal return json", "error", err)
 		w.WriteHeader(http.StatusInternalServerError)
@@ -47,7 +43,7 @@ func (h Handlers) CreateTrackType(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h Handlers) GetTrackTypes(w http.ResponseWriter, r *http.Request) {
-	trackTypeItems, err := h.Repository.GetAll(r.Context())
+	trackTypeItems, err := h.TrackingService.GetAll(r.Context())
 	if err != nil {
 		slog.Error("error reading track types", "error", err)
 		w.WriteHeader(http.StatusInternalServerError)
@@ -55,7 +51,7 @@ func (h Handlers) GetTrackTypes(w http.ResponseWriter, r *http.Request) {
 	}
 	b, err := json.Marshal(trackTypeItems)
 	if err != nil {
-		slog.Error("error reading track types", "error", err)
+		slog.Error("error marshalling track types", "error", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}

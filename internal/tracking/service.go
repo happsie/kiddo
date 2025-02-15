@@ -17,3 +17,11 @@ func (t *TrackingService) Create(context context.Context, trackType TrackType) (
 	}
 	return ID, nil
 }
+ 
+func (t *TrackingService) GetAll(context context.Context) ([]TrackType, error) {
+	trackTypeItems, err := t.Repository.GetAll(context)
+	if err != nil {
+		return nil, err
+	}
+	return trackTypeItems, nil
+}
