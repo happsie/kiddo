@@ -9,6 +9,9 @@ import { Button } from "@core/components/button/Button.tsx";
 import { useEffect, useMemo, useState } from "react";
 import { TimePicker, TimeSelection } from "@core/components/input/TimePicker";
 import { Counter } from "@core/components/input/Counter";
+import { useQuery } from "react-query";
+import { fetchTrackingTypes } from "../queries/tracking";
+import { TrackType } from "../tracking";
 
 type Item = {
     title: string,
@@ -47,6 +50,12 @@ export const Food = () => {
     const [selectedItem, setSelectedItem] = useState<Item | null>(null);
     const [portionCount, setPortionCount] = useState<number>(1);
 
+
+    const { data } = useQuery({
+        queryKey: ['trackTypes'],
+        queryFn: fetchTrackingTypes(),
+    });
+
     const selectedDate = useMemo(() => {
         const date = new Date();
         date.setHours(timeSelection.hours);
@@ -84,7 +93,7 @@ export const Food = () => {
                 <Button onClick={() => filter('food')} color={Color.SoftBlue} variant='secondary'>Food</Button>
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                {items && items.map((item, index) => (<Card onClick={() => handleCardClick(item)} size={'md'}
+                {data && data.map((item: TrackType, index: number) => (<Card onClick={() => handleCardClick(item)} size={'md'}
                     title={item.title} color={item.color} key={index}>
                     <span>{item.emoji}</span>
                 </Card>))}

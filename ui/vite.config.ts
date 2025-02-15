@@ -18,7 +18,7 @@ export default defineConfig({
   server: {
     host: true,
     proxy: {
-      '/api/v1': {
+      '/api/kiddo': {
         target: 'http://localhost:8080',
         changeOrigin: true
       }
