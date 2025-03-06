@@ -10,6 +10,7 @@ type Repository interface {
 	GetAll(context context.Context) ([]TrackType, error)
 	Create(context context.Context, trackType TrackType) (int32, error)
 	Update(context context.Context, trackType TrackType) error
+	Delete(context context.Context, trackID string) error
 }
 
 type TrackingRepository struct {
@@ -46,3 +47,12 @@ func (r TrackingRepository) Create(context context.Context, trackType TrackType)
 func (r TrackingRepository) Update(context context.Context, trackType TrackType) error {
 	return nil
 }
+
+func (r TrackingRepository) Delete(context context.Context, trackID string) error {
+	_, err := r.Pool.Exec(context, "DELETE FROM track_types WHERE id = $1", trackID)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+

@@ -9,52 +9,28 @@ import { Button } from "@core/components/button/Button.tsx";
 import { useEffect, useMemo, useState } from "react";
 import { TimePicker, TimeSelection } from "@core/components/input/TimePicker";
 import { Counter } from "@core/components/input/Counter";
-import { useQuery } from "react-query";
-import { fetchTrackingTypes } from "../queries/tracking";
+import { useMutation, useQuery } from "react-query";
+import { deleteTrackType, fetchTrackingTypes } from "../queries/tracking";
 import { TrackType } from "../tracking";
-
-type Item = {
-    title: string,
-    emoji: string,
-    type: 'liquid' | 'food' | 'fruit',
-    color: string
-}
-
-const initialItems: Item[] = [{
-    title: 'Breastfeeding',
-    type: 'liquid',
-    emoji: '👩‍🍼',
-    color: Color.SoftPurple
-}, {
-    title: 'Banana',
-    type: 'fruit',
-    emoji: '🍌',
-    color: Color.SoftGreen
-}, {
-    title: 'Food',
-    type: 'food',
-    emoji: '🍲',
-    color: Color.SoftBlue
-}, {
-    title: 'Bottle',
-    type: 'liquid',
-    emoji: '🍼',
-    color: Color.SoftPurple
-}];
 
 export const Food = () => {
     const [isOpen, toggle] = useDrawer();
-    const [items, setItems] = useState<Item[]>(initialItems);
     const currentDate = new Date();
     const [timeSelection, setTimeSelection] = useState<TimeSelection>({ hours: currentDate.getHours(), minutes: currentDate.getMinutes() });
-    const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+    const [selectedItem, setSelectedItem] = useState<TrackType | null>(null);
     const [portionCount, setPortionCount] = useState<number>(1);
 
 
     const { data } = useQuery({
         queryKey: ['trackTypes'],
-        queryFn: fetchTrackingTypes(),
+        queryFn: fetchTrackingTypes,
     });
+
+    const mutation = useMutation({
+        mutationFn: (id: number) => {
+            return deleteTrackType(id)
+        }
+    })
 
     const selectedDate = useMemo(() => {
         const date = new Date();
@@ -67,40 +43,35 @@ export const Food = () => {
         console.log(selectedDate);
     }, [selectedDate]);
 
-    function filter(type: string) {
-        if (type === 'ALL') {
-            setItems(initialItems);
-            return;
-        }
-        setItems(initialItems.filter(item => item.type === type));
-    }
 
-    function handleCardClick(item: Item) {
+    function handleCardClick(item: TrackType) {
         setSelectedItem(item);
-        // Let's leave the drawer open instead of re-opening it doing unecessary animations
-        //if (selectedItem && item.type === selectedItem?.type) {
-            toggle();
-        //}
+        if (isOpen) {
+            return
+        }
+        toggle()
     }
 
+    function onDelete() {
+        if (!selectedItem) {
+            return
+        }
+        mutation.mutate(selectedItem.id)
+    }
+
+    console.log(data)
     return (
         <Container>
             <Title size={'xl'} animation={'fade-in'} color={Color.LightText} style="pacifico">Track Food</Title>
-            <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                <Button onClick={() => filter('ALL')} color={Color.SoftBlue} variant='secondary'>All</Button>
-                <Button onClick={() => filter('liquid')} color={Color.SoftPurple} variant='secondary'>Liquid</Button>
-                <Button onClick={() => filter('fruit')} color={Color.SoftGreen} variant='secondary'>Fruit</Button>
-                <Button onClick={() => filter('food')} color={Color.SoftBlue} variant='secondary'>Food</Button>
-            </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {data && data.map((item: TrackType, index: number) => (<Card onClick={() => handleCardClick(item)} size={'md'}
-                    title={item.title} color={item.color} key={index}>
+                    title={item.name} color={item.color} key={index}>
                     <span>{item.emoji}</span>
                 </Card>))}
             </div>
             <Drawer isOpen={isOpen} toggle={toggle}>
                 <div className={styles.drawerContent}>
-                    <Title color={Color.LightText}>{selectedItem !== null ? `${selectedItem.title} ${selectedItem.emoji}` : ''}</Title>
+                    <Title color={Color.LightText}>{selectedItem !== null ? `${selectedItem.name} ${selectedItem.emoji}` : ''}</Title>
                     <div>
                         <Title size="sm" color={Color.LightText}>How many portions?</Title>
                         <Counter fontSize="md" onChange={count => setPortionCount(count)} />
@@ -110,6 +81,7 @@ export const Food = () => {
                             setTimeSelection({ hours: hours, minutes: minutes });
                         }} />
                         <Button onClick={() => alert(`${portionCount} ${selectedDate.toString()} - ${JSON.stringify(selectedItem)}`)} color={Color.Primary}>Save</Button>
+                        <Button variant="secondary" onClick={onDelete}>Delete</Button>
                     </div>
                 </div>
             </Drawer>

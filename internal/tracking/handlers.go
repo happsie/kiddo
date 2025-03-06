@@ -2,6 +2,7 @@ package tracking
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"log/slog"
 	"net/http"
@@ -64,5 +65,16 @@ func (h Handlers) UpdateTrackType(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h Handlers) DeleteTrackType(w http.ResponseWriter, r *http.Request) {
-
+	trackID := r.PathValue("trackID")
+	if trackID == "" {
+		slog.Error("error parsing trackID", "error", fmt.Errorf("no trackID provided"))
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	err := h.TrackingService.Delete(r.Context(), trackID)
+	if err != nil {
+		slog.Error("could not delete track type", "error", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
 }

@@ -25,3 +25,11 @@ func (t *TrackingService) GetAll(context context.Context) ([]TrackType, error) {
 	}
 	return trackTypeItems, nil
 }
+
+func (t *TrackingService) Delete(context context.Context, trackID string) error {
+	err := t.Repository.Delete(context, trackID)
+	if err != nil {
+	return err
+	}
+	return nil
+}

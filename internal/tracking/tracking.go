@@ -3,13 +3,13 @@ package tracking
 import "time"
 
 type TrackType struct {
-	ID         int32
-	Name       string
-	Emoji      string
-	Color      string
-	MetricType string
-	CreatedAt  time.Time
-	UpdatedAt  time.Time
+	ID         int32     `json:"id"`
+	Name       string    `json:"name"`
+	Emoji      string    `json:"emoji"`
+	Color      string    `json:"color"`
+	MetricType string    `json:"metricType"`
+	CreatedAt  time.Time `json:"createdAt"`
+	UpdatedAt  time.Time `json:"updatedAt"`
 }
 
 type TrackTypeRequest struct {
