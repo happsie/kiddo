@@ -60,10 +60,6 @@ func (h Handlers) GetTrackTypes(w http.ResponseWriter, r *http.Request) {
 	w.Write(b)
 }
 
-func (h Handlers) UpdateTrackType(w http.ResponseWriter, r *http.Request) {
-
-}
-
 func (h Handlers) DeleteTrackType(w http.ResponseWriter, r *http.Request) {
 	trackID := r.PathValue("trackID")
 	if trackID == "" {

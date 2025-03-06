@@ -17,7 +17,7 @@ func (t *TrackingService) Create(context context.Context, trackType TrackType) (
 	}
 	return ID, nil
 }
- 
+
 func (t *TrackingService) GetAll(context context.Context) ([]TrackType, error) {
 	trackTypeItems, err := t.Repository.GetAll(context)
 	if err != nil {
@@ -29,7 +29,7 @@ func (t *TrackingService) GetAll(context context.Context) ([]TrackType, error) {
 func (t *TrackingService) Delete(context context.Context, trackID string) error {
 	err := t.Repository.Delete(context, trackID)
 	if err != nil {
-	return err
+		return err
 	}
 	return nil
 }
