@@ -11,6 +11,7 @@ type Repository interface {
 	Create(context context.Context, trackType TrackType) (int32, error)
 	Update(context context.Context, trackType TrackType) error
 	Delete(context context.Context, trackID string) error
+	CreateEvent(context context.Context, event TrackEvent) (int32, error)
 }
 
 type TrackingRepository struct {
@@ -35,7 +36,7 @@ func (r TrackingRepository) GetAll(context context.Context) ([]TrackType, error)
 }
 
 func (r TrackingRepository) Create(context context.Context, trackType TrackType) (int32, error) {
-	row := r.Pool.QueryRow(context, "INSERT INTO track_types (name, emoji, color, metric_type, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id", trackType.Name, trackType.Emoji, trackType.Color, trackType.MetricType, trackType.CreatedAt, trackType.UpdatedAt) 
+	row := r.Pool.QueryRow(context, "INSERT INTO track_types (name, emoji, color, metric_type, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id", trackType.Name, trackType.Emoji, trackType.Color, trackType.MetricType, trackType.CreatedAt, trackType.UpdatedAt)
 	var ID int32
 	err := row.Scan(&ID)
 	if err != nil {
@@ -56,3 +57,12 @@ func (r TrackingRepository) Delete(context context.Context, trackID string) erro
 	return nil
 }
 
+func (r TrackingRepository) CreateEvent(context context.Context, event TrackEvent) (int32, error) {
+	row := r.Pool.QueryRow(context, "INSERT INTO track_event (type, data, created_at, updated_at) VALUES ($1, $2, $3, $4) RETURNING id", event.Type, event.Data, event.CreatedAt, event.UpdatedAt)
+	var ID int32
+	err := row.Scan(&ID)
+	if err != nil {
+		return 0, err
+	}		
+	return ID, nil
+}

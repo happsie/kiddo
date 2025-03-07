@@ -33,3 +33,11 @@ func (t *TrackingService) Delete(context context.Context, trackID string) error 
 	}
 	return nil
 }
+
+func (t *TrackingService) CreateEvent(context context.Context, event TrackEvent) (int32, error) {
+	ID, err := t.Repository.CreateEvent(context, event)
+	if err != nil {
+		return 0, err
+	}
+	return ID, nil
+}

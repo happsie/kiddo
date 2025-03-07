@@ -6,6 +6,7 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
+	"time"
 )
 
 type Handlers struct {
@@ -73,4 +74,29 @@ func (h Handlers) DeleteTrackType(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+}
+
+func (h Handlers) CreateEvent(w http.ResponseWriter, r *http.Request) {
+	event := TrackEvent{}
+	b, err := io.ReadAll(r.Body)
+	if err != nil {
+		slog.Error("could not read post body", "entity", "track event", "err", err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	err = json.Unmarshal(b, &event)
+	if err != nil {
+		slog.Error("could not unmarshal json body", "entity", "track event", "err", err)
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+	event.CreatedAt = time.Now()
+	event.UpdatedAt = time.Now()
+	ID, err := h.TrackingService.CreateEvent(r.Context(), event)
+	if err != nil {
+		slog.Error("could not delete track type", "error", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	slog.Info("event created", "ID", ID)
 }

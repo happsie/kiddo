@@ -1,4 +1,4 @@
-import { TrackType, TrackTypeRequest } from "../tracking"
+import { TrackType, TrackTypeRequest, TrackEvent } from "../tracking"
 
 export async function fetchTrackingTypes(): Promise<TrackType[]> {
     const data = await fetch('/api/kiddo/track-type-v1')
@@ -16,6 +16,14 @@ export async function createTrackType(request: TrackTypeRequest): Promise<Respon
     const data = await fetch(`/api/kiddo/track-type-v1`, {
         method: "POST",
         body: JSON.stringify(request),
+    })
+    return data
+}
+
+export async function createTrackEvent(event: TrackEvent): Promise<Response> {
+    const data = await fetch(`/api/kiddo/track-event-v1`, {
+        method: "POST",
+        body: JSON.stringify(event),
     })
     return data
 }

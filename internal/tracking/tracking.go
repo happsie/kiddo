@@ -21,8 +21,8 @@ type TrackTypeRequest struct {
 
 type TrackEvent struct {
 	ID        int32
-	EventType string
-	Data      string
+	Type      string
+	Data      any 
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }

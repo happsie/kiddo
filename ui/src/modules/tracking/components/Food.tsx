@@ -10,8 +10,8 @@ import { useMemo, useState } from "react";
 import { TimePicker, TimeSelection } from "@core/components/input/TimePicker";
 import { Counter } from "@core/components/input/Counter";
 import { useMutation, useQuery } from "react-query";
-import { createTrackType, deleteTrackType, fetchTrackingTypes } from "../queries/tracking";
-import { TrackType, TrackTypeRequest } from "../tracking";
+import { createTrackEvent, createTrackType, deleteTrackType, fetchTrackingTypes } from "../queries/tracking";
+import { TrackType, TrackTypeRequest, TrackEvent, DefaultTrackEvent } from "../tracking";
 
 export const Food = () => {
     const [isOpen, toggle] = useDrawer();
@@ -20,7 +20,7 @@ export const Food = () => {
     const [selectedItem, setSelectedItem] = useState<TrackType | null>(null);
     const [portionCount, setPortionCount] = useState<number>(1);
     const [isOpen2, toggle2] = useDrawer(); // TODO: better name
-    const [newItem, setNewItem] = useState<TrackTypeRequest>({}) // TODO: better name
+    const [newItem, setNewItem] = useState<TrackTypeRequest>({} as TrackTypeRequest) // TODO: better name
 
     const { data } = useQuery({
         queryKey: ['trackTypes'],
@@ -36,6 +36,12 @@ export const Food = () => {
     const createMutation = useMutation({
         mutationFn: (request: TrackTypeRequest) => {
             return createTrackType(request)
+        }
+    })
+
+    const trackEventMutation = useMutation({
+        mutationFn: (event: TrackEvent) => {
+            return createTrackEvent(event)
         }
     })
 
@@ -62,6 +68,23 @@ export const Food = () => {
         deleteMutation.mutate(selectedItem.id)
     }
 
+    function onTrack() {
+        if (!selectedItem) {
+            return
+        }
+        const data: DefaultTrackEvent = {
+            trackItemId: selectedItem.id,
+            time: selectedDate,
+            metricType: 'this',
+            metric: portionCount,
+        }
+        const event: TrackEvent = {
+            data: data,
+            type: 'food-tracking',
+        }
+        trackEventMutation.mutate(event)
+    }
+
     return (
         <Container>
             <Title size={'xl'} animation={'fade-in'} color={Color.LightText} style="pacifico">Track Food</Title>
@@ -83,7 +106,7 @@ export const Food = () => {
                         <TimePicker color={Color.Background} onChange={({ hours, minutes }) => {
                             setTimeSelection({ hours: hours, minutes: minutes });
                         }} />
-                        <Button onClick={() => alert(`${portionCount} ${selectedDate.toString()} - ${JSON.stringify(selectedItem)}`)} color={Color.Primary}>Save</Button>
+                        <Button onClick={onTrack} color={Color.Primary}>Save</Button>
                         <Button variant="secondary" onClick={onDelete}>Delete</Button>
                     </div>
                 </div>

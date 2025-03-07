@@ -9,3 +9,21 @@ export type TrackType = {
 }
 
 export type TrackTypeRequest = Omit<TrackType, 'id' | 'createdAt' | 'updatedAt'>
+
+
+export type TrackEvent = {
+    id?: number;
+    type: string;
+    data: unknown;
+    createdAt?: string;
+    updatedAt?: string;
+};
+
+export type DefaultTrackEvent = {
+    trackItemId: number;
+    time: Date; 
+    metricType: 'this' | 'that';
+    metric: number;
+    createdAt?: Date;
+    updatedAt?: Date; 
+}
