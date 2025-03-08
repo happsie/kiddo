@@ -128,7 +128,7 @@ export const Food = () => {
                     </div>
                     <div>
                         <Title size="sm" color={Color.LightText}>Metric type</Title>
-                        <input type="text" placeholder="Metric type" onChange={e => setNewItem({ ...newItem, metricType: 'this' })}></input>
+                        <input type="text" placeholder="Metric type" onChange={() => setNewItem({ ...newItem, metricType: 'this' })}></input>
                     </div>
                     <div style={{ display: 'flex' }}>
                         <Button onClick={() => {

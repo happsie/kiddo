@@ -7,9 +7,7 @@
 .nav-items {
     display: flex;
     justify-content: space-evenly;
-    background-color: var(--light);
-    margin: 1em;
-    border-radius: 50px;
+    background-color: var(--text);
 }
 
 .nav-item {
@@ -19,133 +17,12 @@
     justify-content: center;
     cursor: pointer;
     svg {
-        color: var(--secondary);
+        color: var(--light-text);
     }
 }
 
 .selected > svg {
     animation: fade-in .3s 1;
-    color: var(--accent);
+    color: var(--secondary);
 }
 
-.context-menu-selected {
-    background-color: var(--light);
-}
-
-.context-menu-selected > svg {
-    color: var(--accent);
-}
-
-.track-menu-open {
-    animation: tilt .3s 1;
-    animation-fill-mode: forwards;
-}
-
-.track-menu-close {
-    animation: tilt-back .3s 1;
-    animation-fill-mode: forwards;
-}
-
-.track-menu {
-    position: fixed;
-    justify-content: space-evenly;
-    bottom: 5em;
-    width: 50svw;
-    animation: happy-expand .5s 1;
-    @media screen and (max-width: 768px) {
-        animation: mobile-menu-popup .3s 1;
-        animation-fill-mode: forwards;
-        width: 90svw;
-    }
-}
-
-.track-menu-item {
-    width: 100%;
-    padding: 1em;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-    background-color: var(--light);
-
-    &:hover {
-        svg {
-            animation: popup .3s;
-            animation-fill-mode: forwards;
-        }
-    }
-
-    &:last-child {
-        border-top-right-radius: 50px;
-        border-bottom-right-radius: 50px;
-    }
-
-    &:first-child {
-        border-top-left-radius: 50px;
-        border-bottom-left-radius: 50px;
-    }
-}
-
-.track-menu-item:hover svg {
-    color: var(--accent);
-}
-
-.nav-item:hover > svg {
-    color: var(--accent);
-}
-
-@keyframes tilt {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(45deg);
-    }
-}
-
-@keyframes tilt-back {
-    0% {
-        transform: rotate(45deg);
-    }
-    100% {
-        transform: rotate(0deg);
-    }
-}
-
-@keyframes happy-expand {
-    0% {
-        width: 50px;
-    }
-    70% {
-        width: 50svw;
-    }
-}
-
-@keyframes popup {
-    0% {
-        transform: translateY(0px);
-    }
-    100% {
-        transform: translateY(-3px);
-    }
-}
-
-@keyframes mobile-menu-popup {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-3px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
-}
-
-@keyframes fade-in {
-    0% {
-        color: var(--primary);
-    }
-    100% {
-        color: var(--accent);
-    }
-}

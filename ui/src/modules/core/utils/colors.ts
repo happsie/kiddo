@@ -1,13 +1,13 @@
 export const Color = {
-    Text: '#0d0c2b',
-    LightText: '#b0b3ee',
-    Background: '#18222e',
-    Light: '#f8f8f8',
-    Primary: '#809be4',
-    Secondary: '#5566ce',
+    Text: '#B18C6B',
+    LightText: '#f9dcc4',
+    Background: '#f8edeb',
+    Light: '#fcd5ce',
+    Primary: '#ffb5a7',
+    Secondary: '#fec89a',
     Accent: '#ffa37a',
     SoftRed: '#ff999a',
     SoftBlue: '#70d0fb',
-    SoftPurple: '#b185fa',
+    SoftPurple: '#FFB6C1',
     SoftGreen: '#70fbaa'
 } as const;

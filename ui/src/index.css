@@ -4,12 +4,12 @@
 @import "default.css";
 
 :root {
-    --text: #0d0c2b;
-    --light-text: #b0b3ee;
-    --background: #18222e;
-    --light: #f8f8f8;
-    --primary: #809be4;
-    --secondary: #5566ce;
+    --text: #B18C6B;
+    --light-text: #f9dcc4;
+    --background: #f8edeb;
+    --light: #fcd5ce;
+    --primary: #ffb5a7;
+    --secondary: #fec89a;
     --accent: #ffa37a;
     --soft-red: #ff999a;
     --soft-blue: #70d0fb;
