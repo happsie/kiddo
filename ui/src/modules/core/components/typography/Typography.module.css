@@ -23,6 +23,9 @@
     font-style: normal;
 }
 
+.xs {
+    font-size: 12pt;
+}
 .sm {
     font-size: 16pt;
 }

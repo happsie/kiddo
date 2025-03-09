@@ -18,7 +18,7 @@ export const Card: React.FC<CardProps> = ({
     size = 'sm',
     className,
     title,
-    color = Color.Text,
+    color = Color.Background,
     onClick,
     children
 }) => {
@@ -33,7 +33,7 @@ export const Card: React.FC<CardProps> = ({
             })} style={{ borderColor: color }}>
             {children}
         </div>
-        {title ? <Text color={Color.Text}>{title}</Text> : null}
+        {title ? <Text color={Color.TextDark}>{title}</Text> : null}
     </div>
     )
 }

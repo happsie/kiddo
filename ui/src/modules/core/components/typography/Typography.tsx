@@ -2,7 +2,7 @@ import styles from './Typography.module.css';
 import { Color } from "@core/utils/colors.ts";
 import cls from "classnames";
 
-export type TextSize = 'sm' | 'md' | 'lg' | 'xl';
+export type TextSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 type TextAnimation = 'fade-in';
 
@@ -25,6 +25,7 @@ export const Title: React.FC<TitleProps> = ({
 }) => {
     return (
         <h1 className={cls({
+            [styles.xs]: size === 'xs',
             [styles.sm]: size === 'sm',
             [styles.md]: size === 'md',
             [styles.lg]: size === 'lg',

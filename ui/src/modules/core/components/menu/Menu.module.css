@@ -7,7 +7,7 @@
 .nav-items {
     display: flex;
     justify-content: space-evenly;
-    background-color: var(--text);
+    background-color: var(--primary);
 }
 
 .nav-item {
@@ -17,7 +17,7 @@
     justify-content: center;
     cursor: pointer;
     svg {
-        color: var(--light-text);
+        color: var(--background);
     }
 }
 

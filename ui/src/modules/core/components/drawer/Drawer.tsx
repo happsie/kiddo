@@ -15,7 +15,7 @@ export type DrawerProps = {
     color?: typeof Color[keyof typeof Color];
 }
 
-export const Drawer: React.FC<DrawerProps> = ({ isOpen, showCloseButton = true, toggle, color = Color.Accent, children }) => {
+export const Drawer: React.FC<DrawerProps> = ({ isOpen, showCloseButton = true, toggle, color = Color.Primary, children }) => {
     const [animation, setAnimation] = useState<string>('')
 
     useEffect(() => {
@@ -25,11 +25,11 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, showCloseButton = true, 
     }, [isOpen])
 
     return (
-        <aside className={cls(styles.drawer, animation)} style={{ border: `3px solid ${color}`, borderBottom: 'none' }}>
+        <aside className={cls(styles.drawer, animation)}>
             {showCloseButton ?
                 (<div className={styles.drawerTop}>
-                    <FontAwesomeIcon icon={faClose} color={Color.Light}
-                        onClick={toggle} size={'lg'} />
+                    <FontAwesomeIcon icon={faClose} color={Color.Primary}
+                        onClick={toggle} size={'xl'} />
                 </div>) : null}
             {children}
         </aside>
