@@ -6,28 +6,40 @@ import cls from "classnames"
 
 export type SelectorProps = {
     title: string;
-    items: {
-        title: string;
-        emoji: string;
-    }[]
+    items: SelectItem[];
+    onSelect: (item: SelectItem) => void;
 }
 
-export const Selector: React.FC<SelectorProps> = ({ title, items }: SelectorProps) => {
+export type SelectItem = {
+    title: string;
+    emoji: string;
+}
+
+export const Selector: React.FC<SelectorProps> = ({ title, items, onSelect }: SelectorProps) => {
     const [expand, setExpand] = useState(false);
+    const [selected, setSelected] = useState<SelectItem | null>(null)
+
+    function onSelectItem(item: SelectItem) {
+        setSelected(item);
+        setExpand(false);
+        onSelect(item);
+    }
 
     return (
         <div className={cls({
             [styles.selector]: true
-        })} onClick={() => setExpand(!expand)}>
-            <div className={cls({ [styles.selected]: true }, { [styles.expanded]: expand === true })}>
-                <Text color={Color.TextDark} size="xs">{title}</Text>
+        })} >
+            <div className={cls({ [styles.selected]: true })} onClick={() => setExpand(!expand)}>
+                <Text color={Color.TextDark} size="xs">{selected ? `${selected.title} ${selected.emoji}` : title}</Text>
             </div>
-            {expand && items.length > 0 ? items.map(item => (
-                <div className={styles.item}>
-                    {item.emoji} {item.title}
-                </div>
-            )) : null
-           }
+            <div className={cls(styles.items, { [styles.expanded]: expand === true })}>
+                {expand && items.length > 0 ? items.map((item: SelectItem) => (
+                    <div className={styles.item} onClick={() => onSelectItem(item)}>
+                        <Text color={Color.TextDark} size="xs">{item.title}</Text> <span>{item.emoji}</span>
+                    </div>
+                )) : null
+                }
+            </div>
         </div>
     );
 }

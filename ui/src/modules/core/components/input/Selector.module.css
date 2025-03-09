@@ -6,8 +6,8 @@
     padding: .5em;
     border-radius: 20px;
     cursor: pointer;
-    max-height: 300px; 
-    overflow: scroll;
+    max-height: 300px;
+    position: relative;
 }
 
 .selected {
@@ -17,10 +17,25 @@
 }
 
 .expanded {
-    padding-bottom: 5px;
-    border-bottom: 2px solid var(--primary);
+    margin-top: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: 2px solid var(--primary);
+    background-color: var(--background);
+    top: 40px;
+    left: 0;
+    overflow: scroll;
+    padding: .5em;
+    border-radius: 20px;
+    min-height: 250px;
+    max-height: 250px;
+    min-width: 100%;
+    position: absolute;
+
 }
 
 .item {
-   padding: 5px; 
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
 }
+

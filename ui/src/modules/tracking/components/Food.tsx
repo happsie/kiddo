@@ -46,13 +46,6 @@ export const Food = () => {
     })
 
 
-    const selectedDate = useMemo(() => {
-        const date = new Date();
-        date.setHours(timeSelection.hours);
-        date.setMinutes(timeSelection.minutes);
-        return date;
-    }, [timeSelection]);
-
     function handleCardClick(item: TrackType) {
         setSelectedItem(item);
         if (isOpen) {
