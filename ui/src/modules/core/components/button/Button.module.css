@@ -20,3 +20,18 @@
     background-color: transparent;
     border: 1px solid var(--secondary);
 }
+
+.selector {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    max-width: 300px;
+    min-width: 300px;
+    border: 2px solid var(--primary);
+    padding: .5em;
+    border-radius: 20px;
+    cursor: pointer;
+    position: relative;
+    background-color: var(--background);
+    color: var(--text-dark);
+}
+
+

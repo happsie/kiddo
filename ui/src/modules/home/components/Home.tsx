@@ -10,6 +10,7 @@ import { Counter } from "@core/components/input/Counter";
 import { Button } from "@core/components/button/Button";
 import { TimePicker, TimeSelection } from "@core/components/input/TimePicker";
 import { useMemo, useState } from "react";
+import { useDrawer } from "@core/hooks/useDrawer";
 
 function greetingMessage(): string {
     const now = new Date()
@@ -26,6 +27,7 @@ export const Home = () => {
     const navigate = useNavigate();
     const currentDate = new Date();
     const [timeSelection, setTimeSelection] = useState<TimeSelection>({ hours: currentDate.getHours(), minutes: currentDate.getMinutes() });
+    const [toggled, toggle] = useDrawer();
 
     const selectedDate = useMemo(() => {
         const date = new Date();
@@ -42,7 +44,7 @@ export const Home = () => {
                 <Text color={Color.Text}>{greetingMessage()}</Text>
             </div>
             <div style={{ position: 'absolute', top: '20svh', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                <Card title="Food" size="md" onClick={() => navigate('/track/food')}>
+                <Card title="Food" size="md" onClick={() => toggle()}>
                     <span>🍲</span>
                 </Card>
                 <Card title="Bottle" size="md">
@@ -55,13 +57,18 @@ export const Home = () => {
                     <span>💩</span>
                 </Card>
             </div>
-            <Drawer isOpen={true} showCloseButton={true}>
+            <Drawer isOpen={toggled} showCloseButton={true} toggle={toggle}>
                 <div style={{ minHeight: '50svh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <Selector onSelect={(item) => console.log(item)} title="Choose food" items={[{ title: 'Sandwich', emoji: '🥪' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }]} />
-                    <Counter onChange={(count) => console.log(count)}></Counter>
-                    <TimePicker color={Color.Background} onChange={({ hours, minutes }) => {
-                        setTimeSelection({ hours: hours, minutes: minutes });
-                    }} />
+                    <div>
+                        <Selector onSelect={(item) => console.log(item)} title="Choose food" items={[{ title: 'Sandwich', emoji: '🥪' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }]} />
+                        <TimePicker color={Color.Background} onChange={({ hours, minutes }) => {
+                            setTimeSelection({ hours: hours, minutes: minutes });
+                        }} />
+                    </div>
+                    <div>
+                        <Text size="xs">How many portions?</Text>
+                        <Counter onChange={(count) => console.log(count)}></Counter>
+                    </div>
                     <Button onClick={() => []} color={Color.Primary}>Save</Button>
                 </div>
             </Drawer>

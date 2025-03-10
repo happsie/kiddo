@@ -24,7 +24,7 @@ export const Counter: React.FC<CounterProps> = ({ fontSize = 'sm', onChange }) =
     return (
         <div className={styles.counter}>
             <Button variant='secondary' onClick={handleDecrease}>-</Button>
-            <Text size={fontSize}>{count.toString()}</Text>
+            <Text align={'center'} size={fontSize}>{count.toString()}</Text>
             <Button onClick={handleIncrease}>+</Button>
         </div>
     )

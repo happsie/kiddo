@@ -8,12 +8,15 @@ type TextAnimation = 'fade-in';
 
 type TextStyle = 'pacifico' | 'inter' | 'exo';
 
+type TextAlign = 'left' | 'center' | 'right';
+
 export type TitleProps = {
     children: string;
     color?: typeof Color[keyof typeof Color];
     size?: TextSize;
     animation?: TextAnimation;
     style?: TextStyle;
+    align?: TextAlign;
 }
 
 export const Title: React.FC<TitleProps> = ({
@@ -45,7 +48,7 @@ export const Title: React.FC<TitleProps> = ({
 
 type TextProps = Omit<TitleProps, 'animation'>
 
-export const Text: React.FC<TextProps> = ({ color, style = 'inter', size = 'sm', children }) => {
+export const Text: React.FC<TextProps> = ({ color, style = 'inter', size = 'sm', align = 'left', children }) => {
     return (
         <p className={cls({
             [styles.pacifico]: style === 'pacifico',
@@ -55,7 +58,7 @@ export const Text: React.FC<TextProps> = ({ color, style = 'inter', size = 'sm',
             [styles.md]: size === 'md',
             [styles.lg]: size === 'lg',
             [styles.xl]: size === 'xl',
-        })} style={{ color: color ?? '' }}>
+        })} style={{ color: color ?? '', textAlign: align }}>
             {children}
         </p>
     )

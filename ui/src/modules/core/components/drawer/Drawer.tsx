@@ -4,6 +4,7 @@ import cls from "classnames";
 import { useEffect, useState } from "react";
 import { Color } from '@core/utils/colors';
 import { faClose } from '@fortawesome/free-solid-svg-icons'
+import { Text } from '../typography/Typography';
 
 export type DrawerState = boolean | undefined;
 
@@ -26,11 +27,17 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, showCloseButton = true, 
 
     return (
         <aside className={cls(styles.drawer, animation)}>
-            {showCloseButton ?
-                (<div className={styles.drawerTop}>
-                    <FontAwesomeIcon icon={faClose} color={Color.Primary}
-                        onClick={toggle} size={'xl'} />
-                </div>) : null}
+            <div className={styles.header}>
+                <div />
+                <div>
+                    <Text align='center'>Food details</Text>
+                </div>
+                {showCloseButton ?
+                    (<div>
+                        <FontAwesomeIcon icon={faClose} color={Color.Primary}
+                            onClick={toggle} size={'xl'} />
+                    </div>) : <div />}
+            </div>
             {children}
         </aside>
     )

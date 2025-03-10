@@ -32,6 +32,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({ hour = new Date().getHou
         const newSelectedTime = { ...selectedTime, ...values };
         setSelectedTime(newSelectedTime);
         onChange(newSelectedTime);
+        setIsOpen(false);
     }
 
     function ListItem({ selected, item, onClick }: { selected: boolean, item: number, onClick: () => void }) {
@@ -47,13 +48,13 @@ export const TimePicker: React.FC<TimePickerProps> = ({ hour = new Date().getHou
                 }, 100)
             }
             return () => clearTimeout(timeout)
-        }, [liRef]);
-        return <li onClick={onClick} ref={liRef} className={selected ? styles.selected : ''}><Text>{item.toString().padStart(2, '0')}</Text></li>
+        }, [liRef, selected]);
+        return <li onClick={onClick} ref={liRef} className={selected ? styles.selected : ''}><Text size='xs' align={'center'}>{item.toString().padStart(2, '0')}</Text></li>
     }
 
     function getButtonContent() {
         if (isOpen) {
-            return <FontAwesomeIcon icon={faPlus} color={color}
+            return <FontAwesomeIcon icon={faPlus} color={Color.TextDark}
                 className={styles.timePickerOpen}
                 size={'lg'} />
         }
@@ -70,7 +71,7 @@ export const TimePicker: React.FC<TimePickerProps> = ({ hour = new Date().getHou
                     {minutes.map(minute => <ListItem selected={minute === selectedTime.minutes} key={minute} item={minute} onClick={() => handleSelectTime({ minutes: minute })} />)}
                 </ol>
             </div>
-            <Button variant="secondary" color={Color.Primary} onClick={() => setIsOpen(!isOpen)}>{getButtonContent()}</Button>
+            <Button variant="selector" color={Color.Primary} onClick={() => setIsOpen(!isOpen)}>{getButtonContent()}</Button>
         </div>
     )
 }

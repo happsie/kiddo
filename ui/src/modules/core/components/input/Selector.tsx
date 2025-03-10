@@ -26,10 +26,8 @@ export const Selector: React.FC<SelectorProps> = ({ title, items, onSelect }: Se
     }
 
     return (
-        <div className={cls({
-            [styles.selector]: true
-        })} >
-            <div className={cls({ [styles.selected]: true })} onClick={() => setExpand(!expand)}>
+        <div className={styles.selector}>
+            <div className={styles.selected} onClick={() => setExpand(!expand)}>
                 <Text color={Color.TextDark} size="xs">{selected ? `${selected.title} ${selected.emoji}` : title}</Text>
             </div>
             <div className={cls(styles.items, { [styles.expanded]: expand === true })}>

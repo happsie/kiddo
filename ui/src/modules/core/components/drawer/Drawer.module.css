@@ -21,15 +21,16 @@
     animation-fill-mode: forwards;
 }
 
-.drawerTop {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 1em;
-}
-
 .drawerTop>svg {
     cursor: pointer;
     padding: .5em;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em;
+    align-items: baseline;
 }
 
 @keyframes slide-up {
