@@ -22,18 +22,34 @@ type TrackTypeRequest struct {
 type TrackEvent struct {
 	ID        int32
 	Type      string
-	Data      any 
+	Data      any
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
 
-func fromRequest(request TrackTypeRequest) TrackType {
+type TrackEventRequest struct {
+	Type string
+	Data any
+}
+
+func fromTrackTypeRequest(request TrackTypeRequest) TrackType {
+	now := time.Now()
 	return TrackType{
 		Name:       request.Name,
 		Emoji:      request.Emoji,
 		Color:      request.Color,
 		MetricType: request.MetricType,
-		CreatedAt:  time.Now(),
-		UpdatedAt:  time.Now(),
+		CreatedAt:  now,
+		UpdatedAt:  now,
+	}
+}
+
+func fromTrackEventRequest(request TrackEventRequest) TrackEvent {
+	now := time.Now()
+	return TrackEvent{
+		Type:      request.Type,
+		Data:      request.Data,
+		CreatedAt: now,
+		UpdatedAt: now,
 	}
 }

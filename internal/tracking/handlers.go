@@ -6,7 +6,6 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
-	"time"
 )
 
 type Handlers struct {
@@ -27,7 +26,7 @@ func (h Handlers) CreateTrackType(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	trackType := fromRequest(trackTypeRequest)
+	trackType := fromTrackTypeRequest(trackTypeRequest)
 	ID, err := h.TrackingService.Create(r.Context(), trackType)
 	if err != nil {
 		slog.Error("error storing data", "error", err)
@@ -77,21 +76,20 @@ func (h Handlers) DeleteTrackType(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h Handlers) CreateEvent(w http.ResponseWriter, r *http.Request) {
-	event := TrackEvent{}
+	request := TrackEventRequest{}
 	b, err := io.ReadAll(r.Body)
 	if err != nil {
 		slog.Error("could not read post body", "entity", "track event", "err", err)
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	err = json.Unmarshal(b, &event)
+	err = json.Unmarshal(b, &request)
 	if err != nil {
 		slog.Error("could not unmarshal json body", "entity", "track event", "err", err)
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	event.CreatedAt = time.Now()
-	event.UpdatedAt = time.Now()
+	event := fromTrackEventRequest(request)
 	ID, err := h.TrackingService.CreateEvent(r.Context(), event)
 	if err != nil {
 		slog.Error("could not delete track type", "error", err)
@@ -99,4 +97,12 @@ func (h Handlers) CreateEvent(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	slog.Info("event created", "ID", ID)
+	event.ID = ID
+	b, err = json.Marshal(event)
+	if err != nil {
+		slog.Error("could not marshal json", "error", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return 
+	}
+	w.Write(b)
 }

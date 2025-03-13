@@ -31,8 +31,8 @@ export const Selector: React.FC<SelectorProps> = ({ title, items, onSelect }: Se
                 <Text color={Color.TextDark} size="xs">{selected ? `${selected.title} ${selected.emoji}` : title}</Text>
             </div>
             <div className={cls(styles.items, { [styles.expanded]: expand === true })}>
-                {expand && items.length > 0 ? items.map((item: SelectItem) => (
-                    <div className={styles.item} onClick={() => onSelectItem(item)}>
+                {expand && items.length > 0 ? items.map((item: SelectItem, index: number) => (
+                    <div className={styles.item} onClick={() => onSelectItem(item)} key={index}> 
                         <Text color={Color.TextDark} size="xs">{item.title}</Text> <span>{item.emoji}</span>
                     </div>
                 )) : null
