@@ -1,7 +1,7 @@
 import styles from './Card.module.css';
 import cls from "classnames";
-import { Text } from "@core/components/typography/Typography.tsx";
-import { Color } from "@core/utils/colors.ts";
+import { Text } from "@components/typography/Typography.tsx";
+import { Color } from "../../utils/colors.ts";
 
 type CardSize = 'sm' | 'md' | 'lg';
 

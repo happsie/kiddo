@@ -33,6 +33,10 @@
     align-items: baseline;
 }
 
+.closeIcon {
+    cursor: pointer;
+}
+
 @keyframes slide-up {
     0% {
         bottom: -60%;

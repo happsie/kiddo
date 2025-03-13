@@ -1,6 +1,6 @@
 import styles from "./Selector.module.css"
 import { Text } from "../typography/Typography";
-import { Color } from "@core/utils/colors";
+import { Color } from "../../utils/colors";
 import { useState } from "react";
 import cls from "classnames"
 

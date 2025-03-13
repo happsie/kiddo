@@ -1,6 +1,6 @@
 import styles from './Button.module.css';
 import cls from "classnames";
-import { Color } from "@core/utils/colors.ts";
+import { Color } from "../../utils/colors.ts";
 
 export interface Button {
     children: string | React.JSX.Element | React.JSX.Element[];

@@ -1,16 +1,15 @@
-import { Card } from "@core/components/card/Card";
-import { Container } from "@core/components/container/Container";
-import { Text, Title } from "@core/components/typography/Typography";
-import { Color } from "@core/utils/colors";
-import { useNavigate } from "react-router";
+import { Card } from "@components/card/Card";
+import { Container } from "@components/container/Container";
+import { Text, Title } from "@components/typography/Typography";
+import { Color } from "../../utils/colors";
 import styles from "./Home.module.css";
-import { Drawer } from "@core/components/drawer/Drawer";
-import { Selector } from "@core/components/input/Selector";
-import { Counter } from "@core/components/input/Counter";
-import { Button } from "@core/components/button/Button";
-import { TimePicker, TimeSelection } from "@core/components/input/TimePicker";
+import { Drawer } from "@components/drawer/Drawer";
+import { Selector } from "@components/input/Selector";
+import { Counter } from "@components/input/Counter";
+import { Button } from "@components/button/Button";
+import { TimePicker, TimeSelection } from "@components/input/TimePicker";
 import { useMemo, useState } from "react";
-import { useDrawer } from "@core/hooks/useDrawer";
+import { useDrawer } from "@components/drawer/useDrawer";
 
 function greetingMessage(): string {
     const now = new Date()
@@ -24,7 +23,6 @@ function greetingMessage(): string {
 }
 
 export const Home = () => {
-    const navigate = useNavigate();
     const currentDate = new Date();
     const [timeSelection, setTimeSelection] = useState<TimeSelection>({ hours: currentDate.getHours(), minutes: currentDate.getMinutes() });
     const [toggled, toggle] = useDrawer();

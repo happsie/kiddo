@@ -1,5 +1,5 @@
 import styles from './Typography.module.css';
-import { Color } from "@core/utils/colors.ts";
+import { Color } from "../../utils/colors.ts";
 import cls from "classnames";
 
 export type TextSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';

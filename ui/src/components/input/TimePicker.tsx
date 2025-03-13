@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Text } from '../typography/Typography';
 import styles from './TimePicker.module.css';
 import { Button } from '../button/Button';
-import { Color } from '@core/utils/colors';
+import { Color } from '../../utils/colors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Drawer.module.css';
 import cls from "classnames";
 import { useEffect, useState } from "react";
-import { Color } from '@core/utils/colors';
+import { Color } from '../../utils/colors';
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import { Text } from '../typography/Typography';
 
@@ -35,7 +35,7 @@ export const Drawer: React.FC<DrawerProps> = ({ isOpen, showCloseButton = true, 
                 {showCloseButton ?
                     (<div>
                         <FontAwesomeIcon icon={faClose} color={Color.Primary}
-                            onClick={toggle} size={'xl'} />
+                            onClick={toggle} size={'xl'} className={styles.closeIcon} />
                     </div>) : <div />}
             </div>
             {children}
