@@ -21,7 +21,10 @@ export type TrackEvent = {
 export type TrackEventRequest = Omit<TrackEvent, 'id' | 'createdAt' | 'updatedAt'>
 
 export type DefaultTrackEvent = {
-    trackItemId: number;
+    item: {
+        name: string;
+        emoji: string;
+    };
     time: Date;
     metricType: 'this' | 'that';
     metric: number;

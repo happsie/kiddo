@@ -11,11 +11,11 @@ export type SelectorProps = {
 }
 
 export type SelectItem = {
-    title: string;
+    name: string;
     emoji: string;
 }
 
-export const Selector: React.FC<SelectorProps> = ({ title, items, onSelect }: SelectorProps) => {
+export const Selector: React.FC<SelectorProps> = ({ title: name, items, onSelect }: SelectorProps) => {
     const [expand, setExpand] = useState(false);
     const [selected, setSelected] = useState<SelectItem | null>(null)
 
@@ -28,12 +28,12 @@ export const Selector: React.FC<SelectorProps> = ({ title, items, onSelect }: Se
     return (
         <div className={styles.selector}>
             <div className={styles.selected} onClick={() => setExpand(!expand)}>
-                <Text color={Color.TextDark} size="xs">{selected ? `${selected.title} ${selected.emoji}` : title}</Text>
+                <Text color={Color.TextDark} size="xs">{selected ? `${selected.name} ${selected.emoji}` : name}</Text>
             </div>
             <div className={cls(styles.items, { [styles.expanded]: expand === true })}>
                 {expand && items.length > 0 ? items.map((item: SelectItem, index: number) => (
                     <div className={styles.item} onClick={() => onSelectItem(item)} key={index}> 
-                        <Text color={Color.TextDark} size="xs">{item.title}</Text> <span>{item.emoji}</span>
+                        <Text color={Color.TextDark} size="xs">{item.name}</Text> <span>{item.emoji}</span>
                     </div>
                 )) : null
                 }

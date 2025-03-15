@@ -12,6 +12,7 @@ import { useMemo, useState } from "react";
 import { useDrawer } from "@components/drawer/useDrawer";
 import { useCreateTrackEvent } from "../../mutations/tracking";
 import { DefaultTrackEvent, TrackEvent } from "../../models/tracking";
+import { useTrackTypes } from "../../queries/tracking";
 
 function greetingMessage(): string {
     const now = new Date()
@@ -63,6 +64,8 @@ const FoodDrawer: React.FC<FoodDrawerProps> = ({ toggle, toggleState }) => {
     const [timeSelection, setTimeSelection] = useState<TimeSelection>({ hours: currentDate.getHours(), minutes: currentDate.getMinutes() });
     const [portions, setPortions] = useState(1);
     const mutation = useCreateTrackEvent();
+    const trackTypes = useTrackTypes();
+    const [item, setItem] = useState<{ name: string, emoji: string } | null>(null);
 
     const selectedDate = useMemo(() => {
         const date = new Date();
@@ -72,8 +75,14 @@ const FoodDrawer: React.FC<FoodDrawerProps> = ({ toggle, toggleState }) => {
     }, [timeSelection]);
 
     function onSubmit() {
+        if (!item) {
+            return 
+        }
         const data: DefaultTrackEvent = {
-            trackItemId: 1, // TODO: Should be ID from the track types
+            item: {
+                name: item.name,
+                emoji: item.emoji,
+            },
             time: selectedDate,
             metricType: 'this',
             metric: portions,
@@ -85,12 +94,13 @@ const FoodDrawer: React.FC<FoodDrawerProps> = ({ toggle, toggleState }) => {
         }
         mutation.mutate(event);
     }
+    console.log(trackTypes.data);
 
     return (
         <Drawer isOpen={toggleState} showCloseButton={true} toggle={toggle}>
             <div style={{ minHeight: '50svh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div>
-                    <Selector onSelect={(item) => console.log(item)} title="Choose food" items={[{ title: 'Sandwich', emoji: '🥪' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }, { title: 'Pear', emoji: '🍐' }]} />
+                    <Selector onSelect={(item) => setItem(item)} title="Choose food" items={trackTypes.data} />
                     <TimePicker color={Color.Background} onChange={({ hours, minutes }) => {
                         setTimeSelection({ hours: hours, minutes: minutes });
                     }} />
