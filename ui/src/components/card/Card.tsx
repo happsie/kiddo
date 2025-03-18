@@ -3,7 +3,7 @@ import cls from "classnames";
 import { Text } from "@components/typography/Typography.tsx";
 import { Color } from "../../utils/colors.ts";
 
-type CardSize = 'sm' | 'md' | 'lg';
+type CardSize = 'sm' | 'md' | 'lg' | 'wide';
 
 export type CardProps = {
     children: React.JSX.Element | React.JSX.Element[];
@@ -27,9 +27,11 @@ export const Card: React.FC<CardProps> = ({
             styles.card,
             className,
             {
+                [styles.noclick]: onClick === undefined,
                 [styles.sm]: size === 'sm',
                 [styles.md]: size === 'md',
-                [styles.lg]: size === 'lg'
+                [styles.lg]: size === 'lg',
+                [styles.wide]: size === 'wide',
             })} style={{ borderColor: color }}>
             {children}
         </div>

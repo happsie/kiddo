@@ -29,6 +29,10 @@
     }
 }
 
+.noclick {
+    cursor: default;
+}
+
 .sm {
     height: 100px;
     width: 100px;
@@ -44,6 +48,10 @@
     width: 200px;
 }
 
+.wide {
+    height: 80px;
+    width: 100%;
+}
 @keyframes popup {
     0% {
         transform: translateY(0px);
