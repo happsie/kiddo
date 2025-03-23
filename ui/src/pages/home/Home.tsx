@@ -93,8 +93,8 @@ const FoodDrawer: React.FC<FoodDrawerProps> = ({ toggle, toggleState }) => {
             type: 'food-tracking',
         }
         mutation.mutate(event);
+        toggle();
     }
-    console.log(trackTypes.data);
 
     return (
         <Drawer isOpen={toggleState} showCloseButton={true} toggle={toggle}>

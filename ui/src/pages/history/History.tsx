@@ -1,7 +1,6 @@
-import { Text, Title } from "@components/typography/Typography"
-import { Color } from "../../utils/colors"
-import styles from './History.module.css';
+import { Text } from "@components/typography/Typography"
 import { Card } from "@components/card/Card";
+import { Container } from "@components/container/Container";
 
 export const History = () => {
 
@@ -18,19 +17,31 @@ export const History = () => {
     }]
 
     return (
-        <>
-            <div className={styles.hero} style={{ marginBottom: '1em' }}>
-                <Title style="pacifico" color={Color.Text} size="xl">History</Title>
+        <Container>
+            <div style={{ minWidth: '100%', padding: '.5em' }}>
+                <Text align="center" style="pacifico">Today</Text>
+                {items.map((item, index: number) => (
+                    <Card size="wide" key={index}>
+                        <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', padding: '1em', minWidth: '100%' }}>
+                            <Text size="xs">{item.emoji}</Text>
+                            <Text size="xs">{item.name}</Text>
+                            <Text size="xs">{item.time}</Text>
+                        </div>
+                    </Card>
+                ))}
             </div>
-            {items.map((item, index: number) => (
-                <Card size="wide" key={index}>
-                    <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', padding: '1em', minWidth: '100%'}}>
-                        <Text size="xl">{item.emoji}</Text>
-                        <Text size="xs">{item.name}</Text>
-                        <Text size="xs">{item.time}</Text>
-                    </div>
-                </Card>
-            ))}
-        </>
+            <div style={{ minWidth: '100%', padding: '.5em' }}>
+                <Text align="center" style="pacifico">Yesterday</Text>
+                {items.map((item, index: number) => (
+                    <Card size="wide" key={index}>
+                        <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', padding: '1em', minWidth: '100%' }}>
+                            <Text size="xs">{item.emoji}</Text>
+                            <Text size="xs">{item.name}</Text>
+                            <Text size="xs">{item.time}</Text>
+                        </div>
+                    </Card>
+                ))}
+            </div>
+        </Container>
     )
 }
